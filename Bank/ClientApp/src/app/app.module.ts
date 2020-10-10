@@ -8,10 +8,11 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component'
 import { CustomerActionsComponent } from './customer-actions/customer-actions.component';
+import { CustomerService } from './Services/customer.service'  
+
 
 @NgModule({
   declarations: [
@@ -21,8 +22,7 @@ import { CustomerActionsComponent } from './customer-actions/customer-actions.co
     SignupComponent,
     CreateCustomerComponent,
     EditCustomerComponent,
-    CustomerActionsComponent,
-    FetchDataComponent
+    CustomerActionsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,10 +34,9 @@ import { CustomerActionsComponent } from './customer-actions/customer-actions.co
       { path: 'create-customer', component: CreateCustomerComponent },
       { path: 'edit-customer', component: EditCustomerComponent },
       { path: 'customer-actions', component: CustomerActionsComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
