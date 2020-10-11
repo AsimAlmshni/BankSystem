@@ -23,6 +23,7 @@ namespace Bank.Models
 
         public bool UpdateAccountBalance(int id) 
         {
+            return true;
         }
         public IEnumerable<Customer> GetAllCustomers()
         {
