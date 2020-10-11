@@ -28,3 +28,4 @@ Create an Angular 9 and .Net MVC Core 3 application in the correct in OOP
 12.	Client can create a Customer and his Account Types from one screen and one Save.
 
 
+> you can find the UML for the proposal and ERD in the project repository.
