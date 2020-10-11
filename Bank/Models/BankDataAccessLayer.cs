@@ -21,9 +21,19 @@ namespace Bank.Models
             return tbl.ToList();
         }
 
-        public bool UpdateAccountBalance(int id) 
+        public void UpdateAccountBalance(int id, string accountNumber, double amount) 
         {
-            return true;
+            var result = (from cust in db.Customer
+                         where (cust.CustomerId == id)
+                         select cust).FirstOrDefault();
+            result.TotalBalance += amount;
+
+            var result2 = (from acc in db.Accounts
+                          where (acc.CustomerId == id && acc.AccountNumber == accountNumber)
+                          select acc).FirstOrDefault();
+            result2.Balance += amount;
+
+            db.SaveChanges();
         }
         public IEnumerable<Customer> GetAllCustomers()
         {

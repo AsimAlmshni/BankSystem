@@ -30,9 +30,9 @@ namespace Bank.Controllers
                 return false;
         }
 
-        public bool Deposite(int accountNumber, double amount)
+        public void Deposite(int id ,int accountNumber, double amount)
         {
-            throw new NotImplementedException();
+            bankDataAccessLayer.UpdateAccountBalance(id, accountNumber.ToString(), amount);
         }
 
         public bool Transfer(int accountNumberFrom, int accountNumberTo, double amount)
