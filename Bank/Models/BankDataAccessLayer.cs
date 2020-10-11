@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace Bank.Models
 {
@@ -32,6 +33,40 @@ namespace Bank.Models
                           where (acc.CustomerId == id && acc.AccountNumber == accountNumber)
                           select acc).FirstOrDefault();
             result2.Balance += amount;
+
+            db.SaveChanges();
+        }
+
+        public void UpdateAfterWithdraw(int id, string accountNumber, double amount) 
+        {
+            var result = (from cust in db.Customer
+                          where (cust.CustomerId == id)
+                          select cust).FirstOrDefault();
+            result.TotalBalance -= amount;
+
+            var result2 = (from acc in db.Accounts
+                           where (acc.CustomerId == id && acc.AccountNumber == accountNumber)
+                           select acc).FirstOrDefault();
+            result2.Balance -= amount;
+        }
+
+        public void TransferBetweenAccounts(int id, int accountNumberFrom, int accountNumberTo, double amount) 
+        {
+            var temp = (from cust in db.Customer
+                       join acc in db.Accounts
+                       on cust.CustomerId equals acc.CustomerId
+                       where (cust.CustomerId == id && acc.CustomerId == id && acc.AccountNumber == accountNumberFrom.ToString())
+                       select acc).FirstOrDefault();
+
+            temp.Balance -= amount;
+
+            var temp2 = (from cust in db.Customer
+                         join acc in db.Accounts
+                         on cust.CustomerId equals acc.CustomerId
+                         where (cust.CustomerId == id && acc.CustomerId == id && acc.AccountNumber == accountNumberFrom.ToString())
+                         select acc).FirstOrDefault();
+
+            temp.Balance += amount;
 
             db.SaveChanges();
         }

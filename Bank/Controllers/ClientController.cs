@@ -35,7 +35,7 @@ namespace Bank.Controllers
             bankDataAccessLayer.UpdateAccountBalance(id, accountNumber.ToString(), amount);
         }
 
-        public bool Transfer(int accountNumberFrom, int accountNumberTo, double amount)
+        public bool Transfer(int id, int accountNumberFrom, int accountNumberTo, double amount)
         {
             if (AuditTransaction(accountNumberFrom, amount) == true) 
             {
@@ -44,11 +44,11 @@ namespace Bank.Controllers
             throw new NotImplementedException();
         }
 
-        public bool Withdraw(int accountNumber, double amount)
+        public bool Withdraw(int id,int accountNumber, double amount)
         {
             if (AuditTransaction(accountNumber, amount) == true)
             {
-                //do the withdraw here 
+                bankDataAccessLayer.UpdateAfterWithdraw(id, accountNumber.ToString(), amount);
             }
             throw new NotImplementedException();
         }
