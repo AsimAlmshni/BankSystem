@@ -25,7 +25,7 @@ export class CustomerService {
   }
 
   getCustomerById(id: number) {
-    return this._http.get(this.myAppUrl + "api/Customer/Details/" + id)
+    return this._http.get(this.myAppUrl + "api/Customer/GetCustomer/" + id)
       .map((response: Response) => response.json())
       .catch(this.errorHandler)
   }

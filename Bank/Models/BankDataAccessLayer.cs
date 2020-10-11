@@ -13,14 +13,12 @@ namespace Bank.Models
 
         public dynamic GetAccountsBalance(int id ) {
 
-
             var tbl = from cust in db.Customer
                       join account in db.Accounts
                       on cust.CustomerId equals account.CustomerId
                       where (cust.CustomerId == account.CustomerId)
                       select new { accountBalance = account.Balance};
-            return tbl;
-
+            return tbl.ToList();
         }
         public IEnumerable<Customer> GetAllCustomers()
         {

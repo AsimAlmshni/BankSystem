@@ -12,29 +12,39 @@ namespace Bank.Controllers
     [ApiController]
     public class ClientController : ControllerBase, ITransactions
     {
+        private BankDataAccessLayer bankDataAccessLayer = new BankDataAccessLayer();
+
         public ClientController() {
-            BankDataAccessLayer bankDataAccessLayer = new BankDataAccessLayer();
         }
-        public bool AuditTransaction(int accountNumberFrom)
+        public bool AuditTransaction(int accountNumberFrom, double amount)
         {
+
             DateTime localDate = DateTime.Now;
             DateTime utcDate = DateTime.UtcNow;
 
+            var accAmt  = bankDataAccessLayer.GetAccountsBalance(accountNumberFrom);
 
-            throw new NotImplementedException();
+            if (accAmt >= amount)
+                return true;
+            else
+                return false;
         }
 
-        public bool Deposite(int accountNumberFrom)
+        public bool Deposite(int accountNumber, double amount)
         {
             throw new NotImplementedException();
         }
 
-        public bool Transfer(int accountNumberFrom, int accountNumberTo)
+        public bool Transfer(int accountNumberFrom, int accountNumberTo, double amount)
         {
+            if (AuditTransaction(accountNumberFrom, amount) == true) 
+            {
+                //do the transaction here 
+            }
             throw new NotImplementedException();
         }
 
-        public bool Withdraw(int accountNumberFrom)
+        public bool Withdraw(int accountNumber, double amount)
         {
             throw new NotImplementedException();
         }

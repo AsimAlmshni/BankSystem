@@ -29,8 +29,8 @@ namespace Bank.Controllers
         }
 
         [HttpGet]
-        [Route("api/Customer/Details/{id}")]
-        public Customer Details(int id)
+        [Route("api/Customer/GetCustomer/{id}")]
+        public Customer GetCustomer(int id)
         {
             return obj.GetCustomerData(id);
         }
