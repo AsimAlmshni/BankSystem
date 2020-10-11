@@ -46,6 +46,10 @@ namespace Bank.Controllers
 
         public bool Withdraw(int accountNumber, double amount)
         {
+            if (AuditTransaction(accountNumber, amount) == true)
+            {
+                //do the withdraw here 
+            }
             throw new NotImplementedException();
         }
     }

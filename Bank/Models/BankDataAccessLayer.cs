@@ -16,9 +16,13 @@ namespace Bank.Models
             var tbl = from cust in db.Customer
                       join account in db.Accounts
                       on cust.CustomerId equals account.CustomerId
-                      where (cust.CustomerId == account.CustomerId)
+                      where (cust.CustomerId == id && account.CustomerId == id)
                       select new { accountBalance = account.Balance};
             return tbl.ToList();
+        }
+
+        public bool UpdateAccountBalance(int id) 
+        {
         }
         public IEnumerable<Customer> GetAllCustomers()
         {
