@@ -63,7 +63,7 @@ namespace Bank.Models
             var temp2 = (from cust in db.Customer
                          join acc in db.Accounts
                          on cust.CustomerId equals acc.CustomerId
-                         where (cust.CustomerId == id && acc.CustomerId == id && acc.AccountNumber == accountNumberFrom.ToString())
+                         where (cust.CustomerId == id && acc.CustomerId == id && acc.AccountNumber == accountNumberTo.ToString())
                          select acc).FirstOrDefault();
 
             temp.Balance += amount;
