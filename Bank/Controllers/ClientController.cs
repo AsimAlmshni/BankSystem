@@ -43,13 +43,12 @@ namespace Bank.Controllers
             }
         }
 
-        public bool Withdraw(int id,int accountNumber, double amount)
+        public void Withdraw(int id,int accountNumber, double amount)
         {
             if (AuditTransaction(accountNumber, amount) == true)
             {
                 bankDataAccessLayer.UpdateAfterWithdraw(id, accountNumber.ToString(), amount);
             }
-            throw new NotImplementedException();
         }
     }
 }
