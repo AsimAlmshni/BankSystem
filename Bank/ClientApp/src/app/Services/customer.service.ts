@@ -7,11 +7,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 
-
-
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CustomerService {
-  myAppUrl: string = "";
+  myAppUrl: string = '';
 
   constructor(private _http: Http, @Inject('BASE_URL') baseUrl: string) {
     this.myAppUrl = baseUrl;

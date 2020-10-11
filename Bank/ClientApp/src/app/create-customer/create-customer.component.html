@@ -1,6 +1,6 @@
 <div>
   <h1>Create Customer Account</h1>
-  <form>
+  <form #customerForm ="ngForm" (ngSubmit)="save()" novalidate>
     <div>
       <label for="c-id" class="pad">customer ID</label>
       <input name="c-id" placeholder="autogen value" disabled />
@@ -51,6 +51,7 @@
       <input name="c-b" placeholder="Balance" />
     </div>
 
-    <input class="btn-submit" type="submit" />
+    <input class="btn-submit" type="submit" value="SAVE"/>
+    <input class="btn-submit" type="submit" (click)="cancel()" value="CANCEL"/>
   </form>
 </div>

@@ -13,35 +13,34 @@ import { Http, Response } from '@angular/http';
 export class CreateCustomerComponent implements OnInit {
 
   customerForm: FormGroup;
-  title: string = "Create";
-  employeeId: number;
+  title: string = 'Create';
+  customerId: number;
+  customerName: string;
+  mainAccountNuumber: string;
+  mainCurrency: string;
+  totalBalance: number;
+
   errorMessage: any;
-  cityList: Array<any> = [];
 
   constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute,
     private _customerService: CustomerService, private _router: Router) {
-    if (this._avRoute.snapshot.params["id"]) {
-      this.employeeId = this._avRoute.snapshot.params["id"];
+    if (this._avRoute.snapshot.params['id']) {
+      this.customerId = this._avRoute.snapshot.params['id'];
     }
 
     this.customerForm = this._fb.group({
       customerId: 0,
-      name: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      department: ['', [Validators.required]],
-      city: ['', [Validators.required]]
-    })
+      customerName: ['', [Validators.required]],
+      mainAccountNumber: ['', [Validators.required]],
+      mainCurrency: ['', [Validators.required]],
+      totalBalance: ['', [Validators.required]]
+    });
   }
 
   ngOnInit() {
-
-    //this._customerService.getCityList().subscribe(
-    //  data => this.cityList = data
-    //)
-
-    if (this.employeeId > 0) {
-      this.title = "Edit";
-      this._customerService.getCustomerById(this.employeeId)
+    if (this.customerId > 0) {
+      this.title = 'Edit';
+      this._customerService.getCustomerById(this.customerId)
         .subscribe(resp => this.customerForm.setValue(resp)
           , error => this.errorMessage = error);
     }
@@ -54,28 +53,25 @@ export class CreateCustomerComponent implements OnInit {
       return;
     }
 
-    if (this.title == "Create") {
+    if (this.title === 'Create') {
       this._customerService.saveCustomer(this.customerForm.value)
         .subscribe((data) => {
-          this._router.navigate(['/fetch-employee']);
-        }, error => this.errorMessage = error)
+          this._router.navigate(['/fetch-customer']);
+        }, error => this.errorMessage = error);
     }
-    else if (this.title == "Edit") {
+    if (this.title === 'Edit') {
       this._customerService.updateCustomer(this.customerForm.value)
         .subscribe((data) => {
-          this._router.navigate(['/fetch-employee']);
-        }, error => this.errorMessage = error)
+          this._router.navigate(['/fetch-customer']);
+        }, error => this.errorMessage = error);
     }
   }
 
   cancel() {
-    this._router.navigate(['/fetch-employee']);
+    this._router.navigate(['/create-customer']);
   }
 
-  get name() { return this.customerForm.get('name'); }
-  get gender() { return this.customerForm.get('gender'); }
-  get department() { return this.customerForm.get('department'); }
-  get city() { return this.customerForm.get('city'); }  
+  // get name() { return this.customerForm.get('name'); }
 
 
 }

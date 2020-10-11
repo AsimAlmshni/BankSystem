@@ -12,8 +12,15 @@ namespace Bank.Controllers
     [ApiController]
     public class ClientController : ControllerBase, ITransactions
     {
+        public ClientController() {
+            BankDataAccessLayer bankDataAccessLayer = new BankDataAccessLayer();
+        }
         public bool AuditTransaction(int accountNumberFrom)
         {
+            DateTime localDate = DateTime.Now;
+            DateTime utcDate = DateTime.UtcNow;
+
+
             throw new NotImplementedException();
         }
 
