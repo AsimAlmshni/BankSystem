@@ -35,13 +35,12 @@ namespace Bank.Controllers
             bankDataAccessLayer.UpdateAccountBalance(id, accountNumber.ToString(), amount);
         }
 
-        public bool Transfer(int id, int accountNumberFrom, int accountNumberTo, double amount)
+        public void Transfer(int id, int accountNumberFrom, int accountNumberTo, double amount)
         {
             if (AuditTransaction(accountNumberFrom, amount) == true) 
             {
-                //do the transaction here 
+                bankDataAccessLayer.TransferBetweenAccounts(id, accountNumberFrom, accountNumberTo, amount);
             }
-            throw new NotImplementedException();
         }
 
         public bool Withdraw(int id,int accountNumber, double amount)
