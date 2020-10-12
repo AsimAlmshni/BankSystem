@@ -7,11 +7,22 @@ namespace Bank.Models
     {       
         public int BankId { get; set; }
         public string BankName { get; set; }
-        
+
+        private int client;
+
+        public int GetClient()
+        {
+            return client;
+        }
+
+        public void SetClient(int value)
+        {
+            client = value;
+        }
+
         private static Bank instance = null;
         private Bank()
         {
-
         }
         public static Bank Instance
         {
@@ -24,6 +35,9 @@ namespace Bank.Models
                 return instance;
             }
         }
+
+        public virtual ICollection<Client> Client { get; set; }
+
         public void CreateAccount(string Type, string currency, double balance) 
         {
             int accountNumber = Bank.AccountNumberGenerator();

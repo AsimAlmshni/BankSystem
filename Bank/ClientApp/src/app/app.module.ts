@@ -1,41 +1,46 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { SignupComponent } from './signup/signup.component';
-import { CreateCustomerComponent } from './create-customer/create-customer.component';
-import { EditCustomerComponent } from './edit-customer/edit-customer.component'
-import { CustomerActionsComponent } from './customer-actions/customer-actions.component';
-import { CustomerService } from './Services/customer.service'  
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomersListComponent } from './customers-list/customers-list.component'  
+import { CreateEditCustomerComponent } from './create-edit-customer/create-edit-customer.component';
+import { MaterialModule } from './material-module/material.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    SignupComponent,
-    CreateCustomerComponent,
-    EditCustomerComponent,
-    CustomerActionsComponent
+    CustomersListComponent,
+    CreateEditCustomerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'signup', component: SignupComponent },
-      { path: 'create-customer', component: CreateCustomerComponent },
-      { path: 'edit-customer', component: EditCustomerComponent },
-      { path: 'customer-actions', component: CustomerActionsComponent },
-    ])
+      { 
+        path: '',
+        component: CustomersListComponent,
+        pathMatch: 'full'
+      }, {
+        path: 'customers',
+        component: CustomersListComponent,
+      }, {
+        path: 'customers/:id',
+        component: CreateEditCustomerComponent
+      }, {
+        path: 'customers/create',
+        component: CreateEditCustomerComponent
+      }
+    ]),
+    BrowserAnimationsModule
   ],
-  providers: [CustomerService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,14 +15,14 @@ namespace Bank.Controllers
         BankDataAccessLayer obj = new BankDataAccessLayer();
 
         [HttpGet]
-        [Route("api/Customer/Index")]
+        [Route("api/customers")]
         public IEnumerable<Customer> Index()
         {
             return obj.GetAllCustomers();
         }
 
         [HttpPost]
-        [Route("api/Customer/Create")]
+        [Route("api/customer/create")]
         public int Create([FromBody] Customer customer)
         {
             return obj.AddCustomer(customer);
