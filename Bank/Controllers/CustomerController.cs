@@ -8,15 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bank.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]//[action]
     [ApiController]
     public class CustomerController : ControllerBase
     {
         BankDataAccessLayer obj = new BankDataAccessLayer();
 
         [HttpGet]
-        [Route("api/customers")]
-        public IEnumerable<Customer> Index()
+        public IEnumerable<Customer> GetCustomer()
         {
             return obj.GetAllCustomers();
         }

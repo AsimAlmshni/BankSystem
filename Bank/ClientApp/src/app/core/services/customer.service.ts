@@ -10,7 +10,7 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   getCustomersList(): Observable<CustomerModel[]> {
-    return this.http.get<CustomerModel[]>('api/customers');
+    return this.http.get<CustomerModel[]>('api/customer/GetCustomer');
   }
   createNewCustomer(customer: CustomerModel): Observable<HttpResponse<any>> {
     return this.http.post<HttpResponse<any>>('api/customer/create', customer);
