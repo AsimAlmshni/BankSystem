@@ -82,6 +82,18 @@ namespace Bank.Models
             }
         }
 
+        public IEnumerable<Currencies> GetAllCurrencies() 
+        {
+            try
+            {
+                return db.Currencies.ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         //To Add new customer record   
         public int AddCustomer(Customer customer)
         {

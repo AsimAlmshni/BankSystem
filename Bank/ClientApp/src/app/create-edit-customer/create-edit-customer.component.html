@@ -1,23 +1,46 @@
+<p *ngIf="!currencyDataSource"><em>Loading...</em></p>
 <mat-card>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-form-field class="example-full-width">
-            <mat-label>First name</mat-label>
-            <input matInput formControlName="name">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <mat-label>Currency</mat-label>
-            <input matInput formControlName="mainCurrency">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <mat-label>Account Number</mat-label>
-            <input matInput formControlName="accId">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <mat-label>Total Balance</mat-label>
-            <input matInput formControlName="totalBalance">
-        </mat-form-field>
-    </form>
-    <mat-card-actions >
-        <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
-    </mat-card-actions>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Currency</mat-label>
+      <select matNativeControl matInput formControlName="mainCurrency" required>
+        <option *ngFor="let currency of currencyDataSource" [value]="element.Currency">{{ currency.Currency }}</option>>
+      </select>
+    </mat-form-field>
+    <!--<mat-form-field class="example-full-width">
+      <mat-label>Currency</mat-label>
+      <input matInput formControlName="mainCurrency">
+  </mat-form-field>-->
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Account Number</mat-label>
+      <input matInput formControlName="accId">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Total Balance</mat-label>
+      <input matInput formControlName="totalBalance">
+    </mat-form-field>
+  </form>
+  <div class="form-group commands">
+    <!--<mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+  </mat-card-actions>-->
+    <button *ngIf="!id" type="submit"
+            (click)="onSubmit()"
+            [disabled]="form.invalid"
+            class="btn btn-success">
+      Create
+    </button>
+
+    <button type="button"
+            [routerLink]="['/customers']"
+            class="btn">
+      Cancel
+    </button>
+  </div>
 </mat-card>

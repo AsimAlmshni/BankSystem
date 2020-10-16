@@ -21,6 +21,7 @@ namespace Bank.Models
         public virtual DbSet<Bank> Bank { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Currencies> Currencies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -181,6 +182,7 @@ namespace Bank.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("client serve more than one customer ");
             });
+
 
             OnModelCreatingPartial(modelBuilder);
         }

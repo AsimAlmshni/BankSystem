@@ -1,45 +1,54 @@
+<p *ngIf="!dataSource"><em>Loading...</em></p>
+<div class="commands text-right" *ngIf="dataSource">
+  <button type="button"
+          [routerLink]="['/customers/create']"
+          class="btn btn-success">
+    Add a new Customer
+  </button>
+</div>
+
 <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-  </mat-form-field>
-  
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <!-- mainCurrency Column -->
-    <ng-container matColumnDef="mainCurrency">
-      <th mat-header-cell *matHeaderCellDef> Main Currency </th>
-      <td mat-cell *matCellDef="let element"> {{element.mainCurrency}} </td>
-    </ng-container>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
 
-    <!-- accId Column -->
-    <ng-container matColumnDef="accId">
-        <th mat-header-cell *matHeaderCellDef> Account ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.accId}} </td>
-    </ng-container>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- totalBalance Column -->
-    <ng-container matColumnDef="totalBalance">
-        <th mat-header-cell *matHeaderCellDef> Total Balance </th>
-        <td mat-cell *matCellDef="let element"> {{element.totalBalance}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-  </table>
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- mainCurrency Column -->
+  <ng-container matColumnDef="mainCurrency">
+    <th mat-header-cell *matHeaderCellDef> Main Currency </th>
+    <td mat-cell *matCellDef="let element"> {{element.mainCurrency}} </td>
+  </ng-container>
+
+  <!-- accId Column -->
+  <ng-container matColumnDef="accId">
+    <th mat-header-cell *matHeaderCellDef> Account ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.accId}} </td>
+  </ng-container>
+
+  <!-- totalBalance Column -->
+  <ng-container matColumnDef="totalBalance">
+    <th mat-header-cell *matHeaderCellDef> Total Balance </th>
+    <td mat-cell *matCellDef="let element"> {{element.totalBalance}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
+</table>

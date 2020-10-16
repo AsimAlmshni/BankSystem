@@ -9,7 +9,6 @@ import { CustomersListComponent } from './customers-list/customers-list.componen
 import { CreateEditCustomerComponent } from './create-edit-customer/create-edit-customer.component';
 import { MaterialModule } from './material-module/material.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,

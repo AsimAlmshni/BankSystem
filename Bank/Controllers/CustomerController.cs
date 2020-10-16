@@ -12,7 +12,7 @@ namespace Bank.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        BankDataAccessLayer obj = new BankDataAccessLayer();
+        private BankDataAccessLayer obj = new BankDataAccessLayer();
 
         [HttpGet]
         public IEnumerable<Customer> GetCustomer()
@@ -20,8 +20,15 @@ namespace Bank.Controllers
             return obj.GetAllCustomers();
         }
 
+        [HttpGet]
+        public IEnumerable<Currencies> GetCurrencies() 
+        {
+            return obj.GetAllCurrencies();
+            //return (IEnumerable<Currency>)System.Enum.GetValues(typeof(Currency));
+        }
+
         [HttpPost]
-        [Route("api/customer/create")]
+        //[Route("api/customer/create")]
         public int Create([FromBody] Customer customer)
         {
             return obj.AddCustomer(customer);

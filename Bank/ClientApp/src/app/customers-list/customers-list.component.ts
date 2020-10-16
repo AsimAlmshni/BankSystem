@@ -17,11 +17,6 @@ export class CustomersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.data = [
-      // {name: 'Kanaan', mainCurrency: 'Dollar', accId : '1', totalBalance : 900},
-      // {name: 'Asim', mainCurrency: 'Nis', accId : '2', totalBalance : 12900},
-      // {name: 'Fliz', mainCurrency: 'MG', accId : '3', totalBalance : 1900}
-    ];
     
     this.customerService.getCustomersList().subscribe((data: CustomerModel[]) => {
 
