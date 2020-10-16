@@ -56,6 +56,9 @@ namespace Bank.Models
             }
         }
 
+        public int GetGeneratedNumber() {
+            return AccountNumberGenerator();
+        }
         // account number generator
         private static int AccountNumberGenerator() {
             Random rnd = new Random();

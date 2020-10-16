@@ -8,19 +8,20 @@
 
     <mat-form-field>
       <mat-label>Currency</mat-label>
-      <select matNativeControl matInput formControlName="mainCurrency" required>
-        <option *ngFor="let curren of currencyDataSource" [value]="curren.Currency">{{ curren.currency }}</option>>
-      </select>
+      <mat-select [(ngModel)]="selectedValue" matNativeControl matInput formControlName="mainCurrency" (change)="selectChangeHandler($event)" required>
+        <mat-option *ngFor="let curren of currencyDataSource" [value]="curren.currency">{{ curren.currency }}</mat-option>
+      </mat-select>
     </mat-form-field>
     <!--<mat-form-field class="example-full-width">
-      <mat-label>Currency</mat-label>
-      <input matInput formControlName="mainCurrency">
-  </mat-form-field>-->
+        <mat-label>Currency</mat-label>
+        <input matInput formControlName="mainCurrency">
+    </mat-form-field>-->
 
     <mat-form-field class="example-full-width">
       <mat-label>Account Number</mat-label>
-      <input matInput formControlName="accId">
+      <input matInput formControlName="accId" [(ngModel)]="autoGenNumber" [value]="autoGenNumber" readonly>
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <mat-label>Total Balance</mat-label>
       <input matInput formControlName="totalBalance">
@@ -28,8 +29,8 @@
   </form>
   <div class="form-group commands">
     <!--<mat-card-actions>
-    <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
-  </mat-card-actions>-->
+      <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+    </mat-card-actions>-->
     <button *ngIf="!id" type="submit"
             (click)="onSubmit()"
             [disabled]="form.invalid"
@@ -44,3 +45,5 @@
     </button>
   </div>
 </mat-card>
+
+<p> Selected value: {{selectedValue}} </p>

@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using Bank.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 namespace Bank.Controllers
 {
-    [Route("api/[controller]/[action]")]//[action]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -26,8 +25,14 @@ namespace Bank.Controllers
             return obj.GetAllCurrencies();
         }
 
+        [HttpGet]
+        public string GetAutoGenAccountNumber()
+        {
+            Bank.Models.Bank bank = Bank.Models.Bank.Instance;
+            return bank.GetGeneratedNumber().ToString();
+        }
+
         [HttpPost]
-        //[Route("api/customer/create")]
         public int Create([FromBody] Customer customer)
         {
             return obj.AddCustomer(customer);

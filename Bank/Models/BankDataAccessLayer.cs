@@ -99,6 +99,9 @@ namespace Bank.Models
         {
             try
             {
+                var clntID = from client in db.Client select client.CliId;
+                customer.ClientId = clntID.FirstOrDefault();
+                customer.AccId = int.Parse(customer.MainAccountNumber);
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return 1;

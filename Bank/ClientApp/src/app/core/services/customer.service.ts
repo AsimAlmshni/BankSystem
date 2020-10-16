@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomerModel } from 'src/app/models/customer.model';
+import { CustomerModel } from '../../models/customer.model';
 import { CurrencyModel } from '../../models/currency.model';
 
 @Injectable({
@@ -16,7 +16,10 @@ export class CustomerService {
   getCurrenciesList(): Observable<CurrencyModel[]> {
     return this.http.get<CurrencyModel[]>('api/customer/GetCurrencies');
   }
-  createNewCustomer(customer: CustomerModel): Observable<HttpResponse<any>> {
-    return this.http.post<HttpResponse<any>>('api/customer/Create', customer);
+  getGenAccountNumber(): Observable<string> {
+    return this.http.get<string>('api/customer/GetAutoGenAccountNumber');
+  }
+  createNewCustomer(customer: CustomerModel): Observable<HttpResponse<CustomerModel>> {
+    return this.http.post<HttpResponse<CustomerModel>>('api/customer/Create', customer);
   }
 }
