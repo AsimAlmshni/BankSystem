@@ -19,7 +19,7 @@ export class CustomerService {
   getGenAccountNumber(): Observable<string> {
     return this.http.get<string>('api/customer/GetAutoGenAccountNumber');
   }
-  createNewCustomer(customer: CustomerModel): Observable<HttpResponse<CustomerModel>> {
-    return this.http.post<HttpResponse<CustomerModel>>('api/customer/Create', customer);
+  createNewCustomer(customer: CustomerModel): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<any>>('api/customer/Create', customer);
   }
 }
