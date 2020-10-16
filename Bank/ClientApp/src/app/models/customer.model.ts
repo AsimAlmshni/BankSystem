@@ -1,6 +1,8 @@
 export class CustomerModel {
-    name: string;
+    MainAccountNumber : string;
     mainCurrency: string;
-    accId : string;
-    totalBalance : number;
+    totalBalance: number;
+    CustomerName: string;
+
 }
+

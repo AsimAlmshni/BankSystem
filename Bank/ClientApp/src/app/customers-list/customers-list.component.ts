@@ -9,8 +9,9 @@ import { CustomerModel } from '../models/customer.model';
   styleUrls: ['./customers-list.component.css']
 })
 export class CustomersListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'mainCurrency', 'accId', 'totalBalance'];
+  displayedColumns: string[] = ['CustomerName', 'mainCurrency', 'MainAccountNumber', 'totalBalance'];
   dataSource: MatTableDataSource<CustomerModel>;// = new MatTableDataSource(ELEMENT_DATA);
+  bankName: string;
 
   constructor(private customerService: CustomerService) { 
     this.dataSource = new MatTableDataSource<CustomerModel>([]);
@@ -21,7 +22,10 @@ export class CustomersListComponent implements OnInit {
     this.customerService.getCustomersList().subscribe((data: CustomerModel[]) => {
 
       this.dataSource.data = data;
+      debugger
     });
+
+
   }
 
   applyFilter(event: Event) {

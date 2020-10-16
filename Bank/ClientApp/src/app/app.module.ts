@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomersListComponent } from './customers-list/customers-list.component'  
 import { CreateEditCustomerComponent } from './create-edit-customer/create-edit-customer.component';
 import { MaterialModule } from './material-module/material.module';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersListComponent,
+    NavMenuComponent,
     CreateEditCustomerComponent
   ],
   imports: [

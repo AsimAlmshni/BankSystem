@@ -142,6 +142,10 @@ namespace Bank.Models
             }
         }
 
+        public string GetBankNameDB() {
+            var bnkName = from bank in db.Bank select bank.BankName;
+            return bnkName.FirstOrDefault().ToString();
+        }
 
         //To Get the list of AccountsActions  
         public List<AccountActionHistory> GetHistory()

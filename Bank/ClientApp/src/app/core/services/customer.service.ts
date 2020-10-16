@@ -19,6 +19,11 @@ export class CustomerService {
   getGenAccountNumber(): Observable<string> {
     return this.http.get<string>('api/customer/GetAutoGenAccountNumber');
   }
+
+  getBankName(): Observable<string> {
+    return this.http.get<string>('api/Bank/GetBankName');
+  }
+
   createNewCustomer(customer: CustomerModel): Observable<HttpResponse<any>> {
     return this.http.post<HttpResponse<any>>('api/customer/Create', customer);
   }

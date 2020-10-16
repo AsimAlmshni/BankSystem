@@ -35,7 +35,7 @@ export class CreateEditCustomerComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       mainCurrency: ['', Validators.compose([Validators.required])],
-      accId: ['', Validators.compose([Validators.required])],
+      MainAccountNumber: ['', Validators.compose([Validators.required])],
       totalBalance: ['', Validators.compose([Validators.required])]
     })
   }
@@ -44,9 +44,9 @@ export class CreateEditCustomerComponent implements OnInit {
   onSubmit() {
     debugger
     const tempCustomer: CustomerModel = new CustomerModel();
-    tempCustomer.name = this.form.get('name').value;
+    tempCustomer.CustomerName = this.form.get('name').value;
     tempCustomer.mainCurrency = this.form.get('mainCurrency').value;
-    tempCustomer.accId = this.form.get('accId').value;
+    tempCustomer.MainAccountNumber = this.form.get('MainAccountNumber').value;
     tempCustomer.totalBalance = this.form.get('totalBalance').value;
     this.customerService.createNewCustomer(tempCustomer).subscribe((data) => {
       console.log(data);
