@@ -183,8 +183,17 @@ namespace Bank.Models
                     .HasConstraintName("client serve more than one customer ");
             });
 
+            modelBuilder.Entity<Currencies>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
 
-            OnModelCreatingPartial(modelBuilder);
+                entity.Property(e => e.Currency)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+        OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

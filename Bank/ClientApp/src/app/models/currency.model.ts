@@ -1,3 +1,4 @@
 export class CurrencyModel {
-  Currency: string;
+  currency: string;
+  exchangeRate: number;
 }

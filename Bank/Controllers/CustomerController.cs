@@ -24,7 +24,6 @@ namespace Bank.Controllers
         public IEnumerable<Currencies> GetCurrencies() 
         {
             return obj.GetAllCurrencies();
-            //return (IEnumerable<Currency>)System.Enum.GetValues(typeof(Currency));
         }
 
         [HttpPost]

@@ -9,7 +9,7 @@
     <mat-form-field>
       <mat-label>Currency</mat-label>
       <select matNativeControl matInput formControlName="mainCurrency" required>
-        <option *ngFor="let currency of currencyDataSource" [value]="element.Currency">{{ currency.Currency }}</option>>
+        <option *ngFor="let curren of currencyDataSource" [value]="curren.Currency">{{ curren.currency }}</option>>
       </select>
     </mat-form-field>
     <!--<mat-form-field class="example-full-width">

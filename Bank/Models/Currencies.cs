@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bank.Models
 {
-    public class Currencies
+    public partial class Currencies
     {
+        public int Id { get; set; }
         public string Currency { get; set; }
-        public int id { get; set; }
-        public float ExchangeRate { get; set; }
+        public double ExchangeRate { get; set; }
     }
 }
