@@ -8,7 +8,7 @@
 
     <mat-form-field>
       <mat-label>Currency</mat-label>
-      <mat-select [(ngModel)]="selectedValue" matNativeControl matInput formControlName="mainCurrency" (change)="selectChangeHandler($event)" required>
+      <mat-select [(ngModel)]="selectedValue" matNativeControl matInput formControlName="mainCurrency" required>
         <mat-option *ngFor="let curren of currencyDataSource" [value]="curren.currency">{{ curren.currency }}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -46,4 +46,3 @@
   </div>
 </mat-card>
 
-<p> Selected value: {{selectedValue}} </p>

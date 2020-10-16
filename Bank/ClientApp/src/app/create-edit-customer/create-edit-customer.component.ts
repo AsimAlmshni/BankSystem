@@ -12,7 +12,7 @@ import { MatFormField, MatInput, MatTableDataSource } from '@angular/material';
 })
 export class CreateEditCustomerComponent implements OnInit {
   form: FormGroup;
-  currencyDataSource: CurrencyModel[];// = new MatTableDataSource(ELEMENT_DATA);
+  currencyDataSource: CurrencyModel[];
   autoGenNumber: string;
   selectedCurrency: string;
 
@@ -25,12 +25,10 @@ export class CreateEditCustomerComponent implements OnInit {
   ngOnInit() {
 
     this.customerService.getCurrenciesList().subscribe((data: CurrencyModel[]) => {
-
       this.currencyDataSource = data;
     });
 
     this.customerService.getGenAccountNumber().subscribe((data: string) => {
-
       this.autoGenNumber = data;
     });
 
@@ -42,11 +40,6 @@ export class CreateEditCustomerComponent implements OnInit {
     })
   }
 
-  selectChangeHandler(event: any) {
-    //update the ui
-    debugger
-    this.selectedCurrency = event.target.value;
-  }
 
   onSubmit() {
     debugger
