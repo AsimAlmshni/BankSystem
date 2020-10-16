@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomerModel } from '../../models/customer.model';
 import { CurrencyModel } from '../../models/currency.model';
+import { Account } from '../../models/account.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +25,10 @@ export class CustomerService {
   getBankName(): Observable<string> {
     return this.http.get<string>('api/Bank/GetBankName');
   }
-
   createNewCustomer(customer: CustomerModel): Observable<HttpResponse<any>> {
     return this.http.post<HttpResponse<any>>('api/customer/Create', customer);
+  }
+  getCustomerAccounts(id: number): Observable<Account[]> {
+    return this.http.get<Account[]>('api/Accounts/GetCustomerAccounts/' + id);
   }
 }

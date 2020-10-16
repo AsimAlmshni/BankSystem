@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
@@ -80,6 +83,12 @@ namespace Bank.Models
             {
                 throw;
             }
+        }
+
+        public async Task<ActionResult<Accounts>> GetCustomerAccounts(int CustomerID) 
+        {
+            var result = await (from account in db.Accounts where account.CustomerId == CustomerID select account).ToListAsync();
+            return (dynamic)result;
         }
 
         public IEnumerable<Currencies> GetAllCurrencies() 

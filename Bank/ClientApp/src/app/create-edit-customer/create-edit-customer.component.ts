@@ -13,6 +13,7 @@ import { MatFormField, MatInput, MatTableDataSource } from '@angular/material';
 export class CreateEditCustomerComponent implements OnInit {
   form: FormGroup;
   currencyDataSource: CurrencyModel[];
+
   autoGenNumber: string;
   selectedCurrency: string;
 
@@ -27,6 +28,8 @@ export class CreateEditCustomerComponent implements OnInit {
     this.customerService.getCurrenciesList().subscribe((data: CurrencyModel[]) => {
       this.currencyDataSource = data;
     });
+
+
 
     this.customerService.getGenAccountNumber().subscribe((data: string) => {
       this.autoGenNumber = data;

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { CustomerService } from '../core/services/customer.service';
 import { CustomerModel } from '../models/customer.model';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Account } from '../models/account.model'
+
 
 
 @Component({
@@ -18,23 +20,41 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class CustomersListComponent implements OnInit {
-  displayedColumns: string[] = ['CustomerName', 'mainCurrency', 'MainAccountNumber', 'totalBalance'];
+  displayedColumns: string[] = ['CustomerID', 'CustomerName', 'mainCurrency', 'MainAccountNumber', 'totalBalance'];
+  displayedAccountsColumns: string[] = ['AccId', 'AccountNumber', 'Currency', 'Balance'];
+
+
+
+
   dataSource: MatTableDataSource<CustomerModel>;
   bankName: string;
+  CustomerAccountsSource: MatTableDataSource<Account>;
+
 
   constructor(private customerService: CustomerService) { 
     this.dataSource = new MatTableDataSource<CustomerModel>([]);
   }
 
   ngOnInit() {
-    
     this.customerService.getCustomersList().subscribe((data: CustomerModel[]) => {
-
       this.dataSource.data = data;
-      debugger
+      //debugger
     });
 
 
+    this.customerService.getBankName().subscribe((data: string) => {
+      this.bankName = data;
+    });
+
+
+  }
+
+  getAccounts(id: number) {
+    this.customerService.getCustomerAccounts(id).subscribe((accData: any) => {
+      console.log(accData);
+      this.CustomerAccountsSource.data = accData;
+      debugger
+    });
   }
 
   applyFilter(event: Event) {
