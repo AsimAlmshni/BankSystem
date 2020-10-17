@@ -21,7 +21,7 @@ import { Account } from '../models/account.model'
 })
 export class CustomersListComponent implements OnInit {
   displayedColumns: string[] = ['CustomerName', 'mainCurrency', 'MainAccountNumber', 'totalBalance'];
-  displayedAccountsColumns: string[] = ['AccountNumber', 'Currency', 'Balance'];
+  displayedAccountsColumns: string[] = ['AccountNumber', 'Currency', 'Balance', 'action'];
 
 
 
@@ -34,6 +34,7 @@ export class CustomersListComponent implements OnInit {
   constructor(private customerService: CustomerService) { 
     this.dataSource = new MatTableDataSource<CustomerModel>([]);
     this.CustomerAccountsSource = new MatTableDataSource<Account>([]);
+
 
 
   }
@@ -61,6 +62,12 @@ export class CustomersListComponent implements OnInit {
       //debugger
     });
   }
+
+  getCustomerTransHistory(id: number) {
+    location.href = "/transHistory/view/" + id;
+
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

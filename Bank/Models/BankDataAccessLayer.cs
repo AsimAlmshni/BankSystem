@@ -11,7 +11,7 @@ using System.Threading.Tasks.Dataflow;
 
 namespace Bank.Models
 {
-    public class BankDataAccessLayer
+    internal class BankDataAccessLayer
     {
         BankContext db = new BankContext();
 
@@ -23,6 +23,19 @@ namespace Bank.Models
                       where (cust.CustomerId == id)
                       select new { accountBalance = account.Balance};
             return tbl.ToList();
+        }
+
+        public IEnumerable<AccountActionHistory> GetCustomerAccountTransactionHistory(int id) 
+        {
+            var accActHis = from cust in db.Customer
+                            join account in db.Accounts
+                            on cust.CustomerId equals account.CustomerId
+                            join accAH in db.AccountActionHistory
+                            on account.AccId equals accAH.AccountsAccId
+                            where cust.CustomerId == id
+                            select accAH;
+            return accActHis.ToList();
+
         }
 
         public void UpdateAccountBalance(int id, string accountNumber, double amount) 

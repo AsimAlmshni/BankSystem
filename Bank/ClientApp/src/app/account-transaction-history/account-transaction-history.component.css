@@ -1,13 +1,3 @@
-/* Structure */
-/*table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }*/
-
 table {
   width: 100%;
 }
@@ -59,10 +49,4 @@ tr.example-element-row:not(.example-expanded-row):active {
 .mat-form-field {
   font-size: 14px;
   width: 100%;
-}
-
-.pad {
-    position:relative;
-    float: right;
-    padding-left: 10px;
 }

@@ -33,9 +33,17 @@
   totalBalance Column
   <ng-container matColumnDef="totalBalance">
     <th mat-header-cell *matHeaderCellDef> Total Balance </th>
-    <td mat-cell *matCellDef="let element"> {{element.totalBalance | currency : element.mainCurrency}} </td>
+    <td mat-cell *matCellDef="let element">
+      {{element.totalBalance | currency : element.mainCurrency}}
+      <button (click)="getCustomerTransHistory(element.customerId)" class="pad" mat-icon-button  aria-label="Go to Customer History">
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+    </td>
   </ng-container>
 
+
+
+   
 
 
 
@@ -45,15 +53,15 @@
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-        <table class="table" *ngFor="let item of CustomerAccountsSource.data">
+        <table class="table" >
           <tr>
             <th scope="col">Account Number</th>
             <th scope="col">Account Currency</th>
             <th scope="col">Account Balance</th>
           </tr>
-          <tr>
-            <td  scope="row"> {{ item.accountNumber }} </td>
-            <td  scope="row"> {{ item.currency }} </td>
+          <tr *ngFor="let item of CustomerAccountsSource.data">
+            <td scope="row"> {{ item.accountNumber }} </td>
+            <td scope="row"> {{ item.currency }} </td>
             <td scope="row"> {{ item.balance | currency : item.currency }} </td>
           </tr>
         </table>

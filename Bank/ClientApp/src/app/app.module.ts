@@ -9,13 +9,15 @@ import { CustomersListComponent } from './customers-list/customers-list.componen
 import { CreateEditCustomerComponent } from './create-edit-customer/create-edit-customer.component';
 import { MaterialModule } from './material-module/material.module';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { AccountTransactionHistoryComponent } from './account-transaction-history/account-transaction-history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersListComponent,
     NavMenuComponent,
-    CreateEditCustomerComponent
+    CreateEditCustomerComponent,
+    AccountTransactionHistoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,6 +39,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
       }, {
         path: 'customers/create',
         component: CreateEditCustomerComponent
+      }, {
+        path: 'transHistory/view/:id',
+        component: AccountTransactionHistoryComponent
       }
     ]),
     BrowserAnimationsModule
