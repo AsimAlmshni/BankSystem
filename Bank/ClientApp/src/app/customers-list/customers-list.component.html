@@ -71,7 +71,7 @@
               <mat-select matNativeControl matInput>
                 <div *ngFor="let accID of accountTypesDataSource">
                   <div *ngIf="item.accId == accID.accIdtyp">
-                      <mat-option *ngFor="let accTtype of accountTypesDataSource">{{ accTtype.accountType }}</mat-option>
+                    <mat-option>{{ accID.accountType }}</mat-option>
                   </div>
                 </div>
               </mat-select>
