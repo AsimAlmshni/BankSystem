@@ -52,12 +52,11 @@
             <th scope="col">Account Balance</th>
           </tr>
           <tr>
-            <td  scope="row"> {{item.accountNumber}} </td>
-            <td  scope="row"> {{item.currency}} </td>
-            <td  scope="row"> {{item.balance}} </td>
+            <td  scope="row"> {{ item.accountNumber }} </td>
+            <td  scope="row"> {{ item.currency }} </td>
+            <td scope="row"> {{ item.balance | currency : item.currency }} </td>
           </tr>
         </table>
-
       </div>
     </td>
   </ng-container>
