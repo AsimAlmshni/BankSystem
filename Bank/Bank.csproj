@@ -41,6 +41,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\core\services\transaction.service.ts" />
+    <None Remove="ClientApp\src\app\models\account-type.model.ts" />
     <None Remove="ClientApp\src\app\models\account.model.ts" />
     <None Remove="ClientApp\src\app\models\currency.model.ts" />
     <None Remove="ClientApp\src\app\models\trasactions-history.model.ts" />

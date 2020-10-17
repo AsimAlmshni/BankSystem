@@ -47,6 +47,7 @@
 
 
 
+
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
@@ -63,6 +64,20 @@
               <td style="z-index: -1;" scope="row"> {{ item.accountNumber }} </td>
               <td style="z-index: -1;" scope="row"> {{ item.currency }} </td>
               <td style="z-index: -1;" scope="row"> {{ item.balance | currency : item.currency }} </td>
+
+
+            <td style="z-index: -1;" scope="row">
+              <mat-label>Account Types</mat-label>
+              <mat-select matNativeControl matInput>
+                <div *ngFor="let accID of accountTypesDataSource">
+                  <div *ngIf="item.accId == accID.accIdtyp">
+                      <mat-option *ngFor="let accTtype of accountTypesDataSource">{{ accTtype.accountType }}</mat-option>
+                  </div>
+                </div>
+              </mat-select>
+            </td>
+
+
             </tr>
           </table>
         </div>
@@ -70,41 +85,41 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-          class="example-element-row"
-          [class.example-expanded-row]="expandedElement === element"
-          (click)="getAccounts(element.customerId, variable.a); variable.a=true; expandedElement = element">
-      </tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="getAccountTypes(element.customerId); getAccounts(element.customerId, variable.a); variable.a=true; expandedElement = element">
+    </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
-  </div>
+</div>
 
 
-  <!--<table *ngIf="CustomerAccountsSource" mat-table [dataSource]="CustomerAccountsSource" multiTemplateDataRows class="mat-elevation-z8">
+<!--<table *ngIf="CustomerAccountsSource" mat-table [dataSource]="CustomerAccountsSource" multiTemplateDataRows class="mat-elevation-z8">
 
-    <ng-container matColumnDef="AccountNumber">
-      <th mat-header-cell *matHeaderCellDef> AccountNumber </th>
-      <td mat-cell *matCellDef="let account"> {{account.accountNumber}} </td>
+  <ng-container matColumnDef="AccountNumber">
+    <th mat-header-cell *matHeaderCellDef> AccountNumber </th>
+    <td mat-cell *matCellDef="let account"> {{account.accountNumber}} </td>
 
-    </ng-container>
-    accountNumber Column
-    <ng-container matColumnDef="Currency">
-      <th mat-header-cell *matHeaderCellDef> Account Currency </th>
-      <td mat-cell *matCellDef="let account"> {{account.currency}} </td>
-    </ng-container>
-    AccountCurrency Column
-    <ng-container matColumnDef="Balance">
-      <th mat-header-cell *matHeaderCellDef> Account Balance </th>
-      <td mat-cell *matCellDef="let account"> {{account.balance}} </td>
-    </ng-container>
-    balance Column
-    <ng-container matColumnDef="AccId">
-      <th mat-header-cell *matHeaderCellDef> Account ID </th>
-      <td mat-cell *matCellDef="let account"> {{account.accId}} </td>
+  </ng-container>
+  accountNumber Column
+  <ng-container matColumnDef="Currency">
+    <th mat-header-cell *matHeaderCellDef> Account Currency </th>
+    <td mat-cell *matCellDef="let account"> {{account.currency}} </td>
+  </ng-container>
+  AccountCurrency Column
+  <ng-container matColumnDef="Balance">
+    <th mat-header-cell *matHeaderCellDef> Account Balance </th>
+    <td mat-cell *matCellDef="let account"> {{account.balance}} </td>
+  </ng-container>
+  balance Column
+  <ng-container matColumnDef="AccId">
+    <th mat-header-cell *matHeaderCellDef> Account ID </th>
+    <td mat-cell *matCellDef="let account"> {{account.accId}} </td>
 
-    </ng-container>
-    accId Column
+  </ng-container>
+  accId Column
 
-    <tr mat-header-row *matHeaderRowDef="displayedAccountsColumns"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedAccountsColumns"></tr>
 
-  </table>-->
+</table>-->

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../core/services/customer.service';
+import { TransactionService } from '../core/services/transaction.service';
 import { CustomerTransactionsHistory } from '../models/trasactions-history.model';
 
 @Component({
@@ -18,16 +19,20 @@ export class AccountTransactionHistoryComponent implements OnInit {
 
 
 
-  constructor(private customerService: CustomerService, private route: ActivatedRoute) {
+  constructor(private customerService: CustomerService, private route: ActivatedRoute, private transactionService: TransactionService) {
     this.CustomerTransactionsHistoryDataSource = new MatTableDataSource<CustomerTransactionsHistory>([]);
 
   }
 
   ngOnInit() {
+    debugger
     this.id = this.route.snapshot.paramMap.get('id');
-    this.customerService.getCustomerTransactionHistory(+this.id).subscribe((data: CustomerTransactionsHistory[]) => {
-      debugger
-      console.log(data);
+    if(this.id != null)
+      this.customerService.getCustomerTransactionHistory(+this.id).subscribe((data: CustomerTransactionsHistory[]) => {
+        this.CustomerTransactionsHistoryDataSource.data = data;
+      });
+
+    this.transactionService.getTransactions().subscribe((data: CustomerTransactionsHistory[]) => {
       this.CustomerTransactionsHistoryDataSource.data = data;
     });
   }

@@ -4,6 +4,7 @@ import { CustomerService } from '../core/services/customer.service';
 import { CustomerModel } from '../models/customer.model';
 import { CurrencyModel } from '../models/currency.model'
 import { MatFormField, MatInput, MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-edit-customer',
@@ -18,7 +19,8 @@ export class CreateEditCustomerComponent implements OnInit {
   selectedCurrency: string;
 
   constructor(private formBuilder: FormBuilder,
-    private customerService: CustomerService) {
+    private customerService: CustomerService,
+    private router: Router,) {
 
   }
 
@@ -51,7 +53,9 @@ export class CreateEditCustomerComponent implements OnInit {
     tempCustomer.mainCurrency = this.form.get('mainCurrency').value;
     tempCustomer.MainAccountNumber = this.form.get('MainAccountNumber').value;
     tempCustomer.totalBalance = this.form.get('totalBalance').value;
+
     this.customerService.createNewCustomer(tempCustomer).subscribe((data) => {
+      this.router.navigate(['/']);
       console.log(data);
       debugger;
     });

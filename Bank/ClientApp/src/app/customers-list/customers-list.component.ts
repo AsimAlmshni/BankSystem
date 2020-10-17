@@ -4,6 +4,7 @@ import { CustomerService } from '../core/services/customer.service';
 import { CustomerModel } from '../models/customer.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Account } from '../models/account.model'
+import { AccountType } from '../models/account-type.model';
 
 
 
@@ -29,7 +30,7 @@ export class CustomersListComponent implements OnInit {
   bankName: string;
   CustomerAccountsSource: MatTableDataSource<Account>;
   dataSource: MatTableDataSource<CustomerModel>;
-
+  accountTypesDataSource: AccountType[];
 
   constructor(private customerService: CustomerService) { 
     this.dataSource = new MatTableDataSource<CustomerModel>([]);
@@ -64,9 +65,15 @@ export class CustomersListComponent implements OnInit {
       });
   }
 
+  getAccountTypes(id: number) {
+    this.customerService.getAccountTypes(id).subscribe((accTypes: AccountType[]) => {
+      console.log(accTypes);
+      this.accountTypesDataSource = accTypes;
+    });
+  }
+
   getCustomerTransHistory(id: number) {
     location.href = "/transHistory/view/" + id;
-
   }
 
 

@@ -25,6 +25,17 @@ namespace Bank.Models
             return tbl.ToList();
         }
 
+        public IEnumerable<AccountTypes> GetAccountIdType(int id) 
+        {
+            return (from cust in db.Customer
+                    join account in db.Accounts
+                    on cust.CustomerId equals account.CustomerId
+                    join accTps in db.AccountTypes
+                    on account.AccId equals accTps.AccIdtyp
+                    where cust.CustomerId == id
+                    select accTps).ToList();
+        }
+
         public IEnumerable<AccountActionHistory> GetCustomerAccountTransactionHistory(int id) 
         {
             var accActHis = from cust in db.Customer
@@ -36,6 +47,11 @@ namespace Bank.Models
                             select accAH;
             return accActHis.ToList();
 
+        }
+
+        public IEnumerable<AccountActionHistory> GetTransactions() 
+        {
+            return from accTransHis in db.AccountActionHistory select accTransHis;
         }
 
         public void UpdateAccountBalance(int id, string accountNumber, double amount) 

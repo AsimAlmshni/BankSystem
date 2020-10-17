@@ -5,6 +5,7 @@ import { CustomerModel } from '../../models/customer.model';
 import { CurrencyModel } from '../../models/currency.model';
 import { Account } from '../../models/account.model';
 import { CustomerTransactionsHistory } from '../../models/trasactions-history.model';
+import { AccountType } from '../../models/account-type.model';
 
 
 @Injectable({
@@ -34,5 +35,8 @@ export class CustomerService {
   }
   getCustomerTransactionHistory(id: number): Observable<CustomerTransactionsHistory[]> {
     return this.http.get<CustomerTransactionsHistory[]>('api/AccountActionHistory/GetCustomerTransHistory/' + id);
+  }
+  getAccountTypes(id: number): Observable<AccountType[]> {
+    return this.http.get<AccountType[]>('api/AccountTypes/GetAccountTypes/' + id);
   }
 }

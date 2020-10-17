@@ -42,6 +42,9 @@ import { AccountTransactionHistoryComponent } from './account-transaction-histor
       }, {
         path: 'transHistory/view/:id',
         component: AccountTransactionHistoryComponent
+      }, {
+        path: 'transHistory/view',
+        component: AccountTransactionHistoryComponent
       }
     ]),
     BrowserAnimationsModule

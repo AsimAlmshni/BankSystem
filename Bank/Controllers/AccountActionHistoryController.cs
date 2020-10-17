@@ -19,5 +19,11 @@ namespace Bank.Controllers
         {
             return obj.GetCustomerAccountTransactionHistory(id);
         }
+
+        [HttpGet]
+        public IEnumerable<AccountActionHistory> GetTransactions() 
+        {
+            return obj.GetTransactions();
+        }
     }
 }
