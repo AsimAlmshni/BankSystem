@@ -66,18 +66,15 @@
               <td style="z-index: -1;" scope="row"> {{ item.currency }} </td>
               <td style="z-index: -1;" scope="row"> {{ item.balance | currency : item.currency }} </td>
 
-
-            <td style="z-index: -1;" scope="row">
-              <mat-select matNativeControl matInput [(value)]="selected" placeholder="AccountTypes">
-                <div *ngFor="let accID of accountTypesDataSource">
-                  <div *ngIf="item.accId == accID.accIdtyp">
-                    <mat-option [value]="accID.accountType" selected="accID.accountType">{{ accID.accountType }}</mat-option>
+              <td style="z-index: -1;" scope="row">
+                <mat-select matNativeControl matInput [(value)]="selected" placeholder="viewAccountTypes">
+                  <div *ngFor="let accID of accountTypesDataSource">
+                    <div *ngIf="item.accId == accID.accIdtyp">
+                      <mat-option [value]="accID.accountType" selected="accID.accountType">{{ accID.accountType }}</mat-option>
+                    </div>
                   </div>
-                </div>
-              </mat-select>
-            </td>
-
-
+                </mat-select>
+              </td>
             </tr>
           </table>
         </div>
