@@ -20,8 +20,8 @@ import { Account } from '../models/account.model'
   ],
 })
 export class CustomersListComponent implements OnInit {
-  displayedColumns: string[] = ['CustomerID', 'CustomerName', 'mainCurrency', 'MainAccountNumber', 'totalBalance'];
-  displayedAccountsColumns: string[] = ['AccId', 'AccountNumber', 'Currency', 'Balance'];
+  displayedColumns: string[] = ['CustomerName', 'mainCurrency', 'MainAccountNumber', 'totalBalance'];
+  displayedAccountsColumns: string[] = ['AccountNumber', 'Currency', 'Balance'];
 
 
 
