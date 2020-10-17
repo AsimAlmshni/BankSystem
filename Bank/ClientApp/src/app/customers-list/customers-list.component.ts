@@ -55,12 +55,13 @@ export class CustomersListComponent implements OnInit {
 
   }
 
-  getAccounts(id: number) {
-    this.customerService.getCustomerAccounts(id).subscribe((accData: Account[]) => {
-      console.log(accData);
-      this.CustomerAccountsSource.data = accData;
-      //debugger
-    });
+  getAccounts(id: number, a: boolean) {
+    if(a === true)
+      this.customerService.getCustomerAccounts(id).subscribe((accData: Account[]) => {
+        console.log(accData);
+        this.CustomerAccountsSource.data = accData;
+        //debugger
+      });
   }
 
   getCustomerTransHistory(id: number) {

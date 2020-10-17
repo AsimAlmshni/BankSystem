@@ -62,7 +62,8 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .pad {
-    position:relative;
-    float: right;
-    padding-left: 10px;
+  position: relative;
+  float: right;
+  padding-left: 10px;
+  z-index: 10;
 }
