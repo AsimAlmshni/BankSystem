@@ -15,9 +15,9 @@ namespace Bank.Controllers
         private BankDataAccessLayer obj = new BankDataAccessLayer();
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Accounts>> GetCustomerAccounts(int id) 
+        public IEnumerable<Accounts> GetCustomerAccounts(int id) 
         {
-            return await obj.GetCustomerAccounts(id);
+            return obj.GetCustomerAccounts(id);
         }
     }
 }

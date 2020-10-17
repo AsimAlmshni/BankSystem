@@ -26,23 +26,28 @@ export class CustomersListComponent implements OnInit {
 
 
 
-  dataSource: MatTableDataSource<CustomerModel>;
   bankName: string;
   CustomerAccountsSource: MatTableDataSource<Account>;
+  dataSource: MatTableDataSource<CustomerModel>;
 
 
   constructor(private customerService: CustomerService) { 
     this.dataSource = new MatTableDataSource<CustomerModel>([]);
+    this.CustomerAccountsSource = new MatTableDataSource<Account>([]);
+
+
   }
 
   ngOnInit() {
     this.customerService.getCustomersList().subscribe((data: CustomerModel[]) => {
+      console.log(data);
       this.dataSource.data = data;
       //debugger
     });
 
 
     this.customerService.getBankName().subscribe((data: string) => {
+      debugger
       this.bankName = data;
     });
 
@@ -50,10 +55,10 @@ export class CustomersListComponent implements OnInit {
   }
 
   getAccounts(id: number) {
-    this.customerService.getCustomerAccounts(id).subscribe((accData: any) => {
+    this.customerService.getCustomerAccounts(id).subscribe((accData: Account[]) => {
       console.log(accData);
       this.CustomerAccountsSource.data = accData;
-      debugger
+      //debugger
     });
   }
 

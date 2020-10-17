@@ -85,10 +85,10 @@ namespace Bank.Models
             }
         }
 
-        public async Task<ActionResult<Accounts>> GetCustomerAccounts(int CustomerID) 
+        public IEnumerable<Accounts> GetCustomerAccounts(int CustomerID) 
         {
-            var result = await (from account in db.Accounts where account.CustomerId == CustomerID select account).ToListAsync();
-            return (dynamic)result;
+            var result = (from account in db.Accounts where account.CustomerId == CustomerID select account).ToList();
+            return  result;
         }
 
         public IEnumerable<Currencies> GetAllCurrencies() 

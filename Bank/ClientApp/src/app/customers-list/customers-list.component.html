@@ -31,7 +31,7 @@
   </ng-container>
   accId Column
   <ng-container matColumnDef="MainAccountNumber">
-    <th mat-header-cell *matHeaderCellDef> Account ID </th>
+    <th mat-header-cell *matHeaderCellDef> Main Account Number </th>
     <td mat-cell *matCellDef="let element"> {{element.mainAccountNumber}} </td>
   </ng-container>
   totalBalance Column
@@ -52,35 +52,24 @@
         <!--<div class="example-element-diagram">-->
         <!--<div class="example-element-position"> {{element.position}} </div>-->
         <!--<div class="example-element-name"> {{element.CustomerName}} </div>
-          <div class="example-element-symbol"> {{element.mainCurrency}} </div>
-          <div class="example-element-weight"> {{element.MainAccountNumber}} </div>
-          <div class="example-element-weight"> {{element.totalBalance | currency : element.mainCurrency}} </div>
-        </div>-->
-        <table mat-table [dataSource]="CustomerAccountsSource" multiTemplateDataRows class="mat-elevation-z8">
+    <div class="example-element-symbol"> {{element.mainCurrency}} </div>
+    <div class="example-element-weight"> {{element.MainAccountNumber}} </div>
+    <div class="example-element-weight"> {{element.totalBalance | currency : element.mainCurrency}} </div>
+  </div>-->
 
-          <ng-container matColumnDef="AccountNumber">
-            <th mat-header-cell *matHeaderCellDef> AccountNumber </th>
-            <td mat-cell *matCellDef="let account"> {{account.AccountNumber}} </td>
-          </ng-container>
-          Name Column
-          <ng-container matColumnDef="Currency">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let account"> {{account.Currency}} </td>
-          </ng-container>
-          Account Currency Column
-          <ng-container matColumnDef="Balance">
-            <th mat-header-cell *matHeaderCellDef> Account Balance </th>
-            <td mat-cell *matCellDef="let account"> {{account.Balance}} </td>
-          </ng-container>
-          totalBalance Column
-          <ng-container matColumnDef="AccId">
-            <th mat-header-cell *matHeaderCellDef> Account ID </th>
-            <td mat-cell *matCellDef="let account"> {{account.AccId}} </td>
-          </ng-container>
-          accId Column
-
-          <tr mat-header-row *matHeaderRowDef="displayedAccountsColumns"></tr>
-
+        <table class="table" *ngFor="let item of CustomerAccountsSource.data">
+          <tr>
+            <th scope="col">Account ID</th>
+            <th scope="col">Account Number</th>
+            <th scope="col">Account Currency</th>
+            <th scope="col">Account Balance</th>
+          </tr>
+          <tr>
+            <td  scope="row"> {{item.accId}} </td>
+            <td  scope="row"> {{item.accountNumber}} </td>
+            <td  scope="row"> {{item.currency}} </td>
+            <td  scope="row"> {{item.balance}} </td>
+          </tr>
         </table>
 
       </div>
@@ -94,10 +83,36 @@
       (click)="getAccounts(element.customerId); expandedElement = element">
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
 </table>
 
 
-<!--CustomerAccountsSource-->
-<!--(click)="getAccounts()">-->
-<!--(click)="expandedElement = element"-->
 
+            <!--<table *ngIf="CustomerAccountsSource" mat-table [dataSource]="CustomerAccountsSource" multiTemplateDataRows class="mat-elevation-z8">
+
+              <ng-container matColumnDef="AccountNumber">
+                <th mat-header-cell *matHeaderCellDef> AccountNumber </th>
+                <td mat-cell *matCellDef="let account"> {{account.accountNumber}} </td>
+
+              </ng-container>
+              accountNumber Column
+              <ng-container matColumnDef="Currency">
+                <th mat-header-cell *matHeaderCellDef> Account Currency </th>
+                <td mat-cell *matCellDef="let account"> {{account.currency}} </td>
+              </ng-container>
+              AccountCurrency Column
+              <ng-container matColumnDef="Balance">
+                <th mat-header-cell *matHeaderCellDef> Account Balance </th>
+                <td mat-cell *matCellDef="let account"> {{account.balance}} </td>
+              </ng-container>
+              balance Column
+              <ng-container matColumnDef="AccId">
+                <th mat-header-cell *matHeaderCellDef> Account ID </th>
+                <td mat-cell *matCellDef="let account"> {{account.accId}} </td>
+
+              </ng-container>
+              accId Column
+
+              <tr mat-header-row *matHeaderRowDef="displayedAccountsColumns"></tr>
+
+            </table>-->
