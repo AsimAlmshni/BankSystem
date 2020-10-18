@@ -73,7 +73,6 @@ export class CreateEditCustomerComponent implements OnInit {
 
     tempCustomerWithAccounts.accounts = new Account();
     tempCustomerWithAccounts.customer = new CustomerModel();
-    tempCustomerWithAccounts.accountTypes = new AccountType();
 
     tempCustomerWithAccounts.customer.CustomerName = this.form.get('name').value;
     tempCustomerWithAccounts.customer.MainCurrency = this.form.get('mainCurrency').value;
@@ -84,7 +83,7 @@ export class CreateEditCustomerComponent implements OnInit {
     tempCustomerWithAccounts.accounts.Balance = this.form.get('balance').value;
     tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
 
-    tempCustomerWithAccounts.accountTypes.AccountType = "this.form.get('accountType').value";
+    tempCustomerWithAccounts.accountTypes = this.form.get('accountType').value;
       
 
     this.customerService.createNewCustomer(tempCustomerWithAccounts).subscribe((data) => {

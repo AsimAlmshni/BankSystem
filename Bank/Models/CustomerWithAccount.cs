@@ -9,7 +9,8 @@ namespace Bank.Models
     {
         public Customer customer;
         public Accounts accounts;
-        public AccountTypes accountTypes;
+        //public AccountTypes[] accountTypes;
+        public string []accountTypes;
 
     }
 }

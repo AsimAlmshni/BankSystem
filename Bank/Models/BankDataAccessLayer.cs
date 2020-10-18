@@ -137,6 +137,7 @@ namespace Bank.Models
         {
             try
             {
+                AccountTypes accTyps = new AccountTypes();
 
                 var clntID = from client in db.Client 
                              select client.CliId;
@@ -158,8 +159,14 @@ namespace Bank.Models
                             where acc.CustomerId == customer.customer.CustomerId
                             select acc.AccId;
 
-                customer.accountTypes.AccIdtyp = accID.FirstOrDefault();
-                db.AccountTypes.Add(customer.accountTypes);
+
+                foreach (var item in customer.accountTypes)
+                {
+                    var v1 = accID.FirstOrDefault();
+                    accTyps.AccIdtyp = v1;
+                    accTyps.AccountType = item;
+                    db.AccountTypes.Add(accTyps);
+                }
 
 
                 db.SaveChanges();
