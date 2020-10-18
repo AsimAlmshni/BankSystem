@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../core/services/customer.service';
+import { Bank } from '../models/bank.model';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,7 +9,7 @@ import { CustomerService } from '../core/services/customer.service';
 })
 export class NavMenuComponent implements OnInit {
   isExpanded = false;
-  bankName: string;
+  bank: Bank;
 
   collapse() {
     this.isExpanded = false;
@@ -17,8 +18,9 @@ export class NavMenuComponent implements OnInit {
   constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
-    this.customerService.getBankName().subscribe((data: string) => {
-      this.bankName = data;
+    this.customerService.getBankName().subscribe((data: Bank) => {
+      debugger
+      this.bank = data;
     });
   }
   toggle() {

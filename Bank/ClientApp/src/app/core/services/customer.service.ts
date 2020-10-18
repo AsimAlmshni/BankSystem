@@ -8,6 +8,7 @@ import { CustomerTransactionsHistory } from '../../models/trasactions-history.mo
 import { AccountType } from '../../models/account-type.model';
 import { AccountTypesDS } from '../../models/account-types-dataset.model';
 import { CustomerWithAccounts } from '../../models/customer-with-accounts.model';
+import { Bank } from '../../models/bank.model';
 
 
 @Injectable({
@@ -26,8 +27,8 @@ export class CustomerService {
     return this.http.get<string>('api/customer/GetAutoGenAccountNumber');
   }
 
-  getBankName(): Observable<string> {
-    return this.http.get<string>('api/Bank/GetBankName');
+  getBankName(): Observable<Bank> {
+    return this.http.get<Bank>('api/Bank/GetBankName');
   }
   createNewCustomer(tempCustomerWithAccounts: CustomerWithAccounts): Observable<HttpResponse<any>> {
     return this.http.post<HttpResponse<any>>('api/customer/Create', tempCustomerWithAccounts);

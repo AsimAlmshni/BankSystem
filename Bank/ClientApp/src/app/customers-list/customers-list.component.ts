@@ -5,6 +5,7 @@ import { CustomerModel } from '../models/customer.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Account } from '../models/account.model'
 import { AccountType } from '../models/account-type.model';
+import { Bank } from '../models/bank.model';
 
 
 
@@ -24,10 +25,6 @@ export class CustomersListComponent implements OnInit {
   displayedColumns: string[] = ['CustomerName', 'mainCurrency', 'MainAccountNumber', 'totalBalance'];
   displayedAccountsColumns: string[] = ['AccountNumber', 'Currency', 'Balance', 'action'];
 
-
-
-
-  bankName: string;
   CustomerAccountsSource: MatTableDataSource<Account>;
   dataSource: MatTableDataSource<CustomerModel>;
   accountTypesDataSource: AccountType[];
@@ -46,13 +43,6 @@ export class CustomersListComponent implements OnInit {
       this.dataSource.data = data;
       //debugger
     });
-
-
-    this.customerService.getBankName().subscribe((data: string) => {
-      debugger
-      this.bankName = data;
-    });
-
 
   }
 

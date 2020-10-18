@@ -16,7 +16,7 @@ namespace Bank.Controllers
         private BankDataAccessLayer obj = new BankDataAccessLayer();
         // GET: api/<BankController>
         [HttpGet]
-        public string GetBankName()
+        public IEnumerable<Bank.Models.Bank> GetBankName()
         {
             return obj.GetBankNameDB();
         }

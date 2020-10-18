@@ -137,7 +137,6 @@ namespace Bank.Models
         {
             try
             {
-                AccountTypes accTyps = new AccountTypes();
 
                 var clntID = from client in db.Client 
                              select client.CliId;
@@ -162,6 +161,7 @@ namespace Bank.Models
 
                 foreach (var item in customer.accountTypes)
                 {
+                    AccountTypes accTyps = new AccountTypes();
                     var v1 = accID.FirstOrDefault();
                     accTyps.AccIdtyp = v1;
                     accTyps.AccountType = item;
@@ -212,9 +212,9 @@ namespace Bank.Models
             return (from accTypDS in db.AccountTypesDataSet select accTypDS).ToList();
         }
 
-        public string GetBankNameDB() {
-            var bnkName = from bank in db.Bank select bank.BankName;
-            return bnkName.FirstOrDefault().ToString();
+        public IEnumerable<Bank> GetBankNameDB() {
+            var bnkName = from bank in db.Bank select bank;
+            return bnkName.ToList();
         }
 
         //To Get the list of AccountsActions  
