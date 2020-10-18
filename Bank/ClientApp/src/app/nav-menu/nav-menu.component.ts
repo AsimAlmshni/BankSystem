@@ -19,7 +19,6 @@ export class NavMenuComponent implements OnInit {
 
   ngOnInit() {
     this.customerService.getBankName().subscribe((data: Bank) => {
-      debugger
       this.bank = data;
     });
   }
