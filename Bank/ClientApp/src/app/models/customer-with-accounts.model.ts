@@ -4,6 +4,6 @@ import { Account } from "./account.model";
 
 export class CustomerWithAccounts {
   customer: CustomerModel;
-  account: Account;
-  accountType: AccountType;
+  accounts: Account;
+  accountTypes: AccountType;
 }

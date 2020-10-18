@@ -71,20 +71,21 @@ export class CreateEditCustomerComponent implements OnInit {
     debugger
     const tempCustomerWithAccounts: CustomerWithAccounts = new CustomerWithAccounts();
 
+    tempCustomerWithAccounts.accounts = new Account();
     tempCustomerWithAccounts.customer = new CustomerModel();
+    tempCustomerWithAccounts.accountTypes = new AccountType();
+
     tempCustomerWithAccounts.customer.CustomerName = this.form.get('name').value;
     tempCustomerWithAccounts.customer.MainCurrency = this.form.get('mainCurrency').value;
     tempCustomerWithAccounts.customer.MainAccountNumber = this.form.get('MainAccountNumber').value;
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
-    tempCustomerWithAccounts.account = new Account();
-    tempCustomerWithAccounts.account.AccountNumber = this.form.get('subAccountNumber').value;
-    tempCustomerWithAccounts.account.Balance = this.form.get('balance').value;
-    tempCustomerWithAccounts.account.Currency = this.form.get('currency').value;
+    tempCustomerWithAccounts.accounts.AccountNumber = this.form.get('subAccountNumber').value;
+    tempCustomerWithAccounts.accounts.Balance = this.form.get('balance').value;
+    tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
 
-    tempCustomerWithAccounts.accountType = new AccountType();
-    tempCustomerWithAccounts.accountType.AccountType = this.form.get('accountType').value;
-
+    tempCustomerWithAccounts.accountTypes.AccountType = "this.form.get('accountType').value";
+      
 
     this.customerService.createNewCustomer(tempCustomerWithAccounts).subscribe((data) => {
       this.router.navigate(['/']);

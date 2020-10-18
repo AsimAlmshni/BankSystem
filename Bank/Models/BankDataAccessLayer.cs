@@ -147,13 +147,17 @@ namespace Bank.Models
                 db.SaveChanges();
 
                 var customerID = from cust in db.Customer
+                                 where cust.MainAccountNumber == customer.customer.MainAccountNumber
                                  select cust.CustomerId;
+
                 customer.accounts.CustomerId = customerID.FirstOrDefault();
                 db.Accounts.Add(customer.accounts);
                 db.SaveChanges();
 
-                var accID = from cust in db.Accounts
-                                 select cust.AccId;
+                var accID = from acc in db.Accounts
+                            where acc.CustomerId == customer.customer.CustomerId
+                            select acc.AccId;
+
                 customer.accountTypes.AccIdtyp = accID.FirstOrDefault();
                 db.AccountTypes.Add(customer.accountTypes);
 

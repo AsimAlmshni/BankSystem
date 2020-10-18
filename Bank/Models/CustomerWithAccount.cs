@@ -7,9 +7,9 @@ namespace Bank.Models
 {
     public class CustomerWithAccount
     {
-        public Customer customer = new Customer();
-        public Accounts accounts  = new Accounts();
-        public AccountTypes accountTypes = new AccountTypes();
+        public Customer customer;
+        public Accounts accounts;
+        public AccountTypes accountTypes;
 
     }
 }
