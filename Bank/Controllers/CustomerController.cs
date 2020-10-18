@@ -33,8 +33,9 @@ namespace Bank.Controllers
         }
 
         [HttpPost]
-        public int Create([FromBody] Customer customer)
+        public int Create(CustomerWithAccount customer)
         {
+            Console.WriteLine("KMSG");
             return obj.AddCustomer(customer);
         }
 

@@ -13,9 +13,9 @@
       </mat-select>
     </mat-form-field>
     <!--<mat-form-field class="example-full-width">
-        <mat-label>Currency</mat-label>
-        <input matInput formControlName="mainCurrency">
-    </mat-form-field>-->
+      <mat-label>Currency</mat-label>
+      <input matInput formControlName="mainCurrency">
+  </mat-form-field>-->
 
     <mat-form-field class="example-full-width">
       <mat-label>Account Number</mat-label>
@@ -26,6 +26,57 @@
       <mat-label>Total Balance</mat-label>
       <input matInput formControlName="totalBalance">
     </mat-form-field>
+
+    <hr>
+    <!-------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <mat-form-field class="example-full-width">
+      <mat-label>Account Number</mat-label>
+      <input matInput formControlName="subAccountNumber" [(ngModel)]="autoGenSubNumber" [value]="autoGenSubNumber" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Currency</mat-label>
+      <mat-select [(ngModel)]="selectedValueCurrency" matNativeControl matInput formControlName="currency" required>
+        <mat-option *ngFor="let curren of currencyDataSource" [value]="curren.currency">{{ curren.currency }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--<mat-form-field class="example-full-width">
+      <mat-label>Currency</mat-label>
+      <input matInput formControlName="mainCurrency">
+  </mat-form-field>-->
+    <mat-form-field class="example-full-width">
+      <mat-label>Balance</mat-label>
+      <input matInput formControlName="balance">
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Account Type</mat-label>
+      <mat-select formControlName="accountType" multiple>
+        <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--<mat-form-field>
+      <mat-label>Account Type</mat-label>
+      <mat-select [(ngModel)]="selectedValueDS" matNativeControl matInput formControlName="accountType" required>
+        <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{ accTypDS.accountType }}</mat-option>
+      </mat-select>
+    </mat-form-field>-->
+        <!--<mat-select-trigger>
+          {{toppings.value ? toppings.value[0] : ''}}
+          <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+            (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>-->
+
+    <div class="addMoreAccount"></div>
+
+    <button style="float: right;" *ngIf="!id" type="submit"
+            (click)="addAddAccountFrom()"
+            class="btn btn-success">
+      Add More
+    </button>
+
   </form> 
   <div class="form-group commands">
     <!--<mat-card-actions>

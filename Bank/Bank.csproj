@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
@@ -43,8 +44,10 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\core\services\transaction.service.ts" />
     <None Remove="ClientApp\src\app\models\account-type.model.ts" />
+    <None Remove="ClientApp\src\app\models\account-types-dataset.model.ts" />
     <None Remove="ClientApp\src\app\models\account.model.ts" />
     <None Remove="ClientApp\src\app\models\currency.model.ts" />
+    <None Remove="ClientApp\src\app\models\customer-with-accounts.model.ts" />
     <None Remove="ClientApp\src\app\models\trasactions-history.model.ts" />
   </ItemGroup>
 

@@ -133,14 +133,31 @@ namespace Bank.Models
         }
 
         //To Add new customer record   
-        public int AddCustomer(Customer customer)
+        public int AddCustomer(CustomerWithAccount customer)
         {
             try
             {
-                var clntID = from client in db.Client select client.CliId;
-                customer.ClientId = clntID.FirstOrDefault();
-                customer.AccId = int.Parse(customer.MainAccountNumber);
-                db.Customer.Add(customer);
+
+                var clntID = from client in db.Client 
+                             select client.CliId;
+                customer.customer.ClientId = clntID.FirstOrDefault();
+
+                //customer.AccId = int.Parse(customer.MainAccountNumber);
+                db.Customer.Add(customer.customer);
+                db.SaveChanges();
+
+                var customerID = from cust in db.Customer
+                                 select cust.CustomerId;
+                customer.accounts.CustomerId = customerID.FirstOrDefault();
+                db.Accounts.Add(customer.accounts);
+                db.SaveChanges();
+
+                var accID = from cust in db.Accounts
+                                 select cust.AccId;
+                customer.accountTypes.AccIdtyp = accID.FirstOrDefault();
+                db.AccountTypes.Add(customer.accountTypes);
+
+
                 db.SaveChanges();
                 return 1;
             }
@@ -178,6 +195,10 @@ namespace Bank.Models
             {
                 throw;
             }
+        }
+
+        public IEnumerable<AccountTypesDataSet> GetAccountTypesDS() {
+            return (from accTypDS in db.AccountTypesDataSet select accTypDS).ToList();
         }
 
         public string GetBankNameDB() {

@@ -19,5 +19,10 @@ namespace Bank.Controllers
         {
             return obj.GetAccountIdType(id);
         }
+
+        [HttpGet]
+        public IEnumerable<AccountTypesDataSet> getAccountsTypsDataSet() {
+            return obj.GetAccountTypesDS();
+        }
     }
 }

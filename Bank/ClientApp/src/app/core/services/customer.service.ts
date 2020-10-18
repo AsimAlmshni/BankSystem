@@ -6,6 +6,8 @@ import { CurrencyModel } from '../../models/currency.model';
 import { Account } from '../../models/account.model';
 import { CustomerTransactionsHistory } from '../../models/trasactions-history.model';
 import { AccountType } from '../../models/account-type.model';
+import { AccountTypesDS } from '../../models/account-types-dataset.model';
+import { CustomerWithAccounts } from '../../models/customer-with-accounts.model';
 
 
 @Injectable({
@@ -27,8 +29,8 @@ export class CustomerService {
   getBankName(): Observable<string> {
     return this.http.get<string>('api/Bank/GetBankName');
   }
-  createNewCustomer(customer: CustomerModel): Observable<HttpResponse<any>> {
-    return this.http.post<HttpResponse<any>>('api/customer/Create', customer);
+  createNewCustomer(tempCustomerWithAccounts: CustomerWithAccounts): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<any>>('api/customer/Create', tempCustomerWithAccounts);
   }
   getCustomerAccounts(id: number): Observable<Account[]> {
     return this.http.get<Account[]>('api/Accounts/GetCustomerAccounts/' + id);
@@ -38,5 +40,8 @@ export class CustomerService {
   }
   getAccountTypes(id: number): Observable<AccountType[]> {
     return this.http.get<AccountType[]>('api/AccountTypes/GetAccountTypes/' + id);
+  }
+  getAccountTypsFromDataSet(): Observable<AccountTypesDS[]> {
+    return this.http.get<AccountTypesDS[]>('api/AccountTypes/getAccountsTypsDataSet');
   }
 }

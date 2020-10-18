@@ -22,6 +22,8 @@ namespace Bank.Models
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Currencies> Currencies { get; set; }
+        public virtual DbSet<AccountTypesDataSet> AccountTypesDataSet { get; set; }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -193,7 +195,20 @@ namespace Bank.Models
                     .IsUnicode(false);
             });
 
-        OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<AccountTypesDataSet>(entity =>
+            {
+                entity.HasKey(e => e.AcctypDs)
+                    .HasName("PK__AccountT__0F8D552E6001683A");
+
+                entity.Property(e => e.AcctypDs).HasColumnName("AcctypDS");
+
+                entity.Property(e => e.AccountType)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+
+            OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
