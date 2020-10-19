@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using System;
@@ -197,10 +197,11 @@ namespace Bank.Models
 
                 foreach (var item in customer.accountTypes)
                 {
+
                     AccountTypes accTyps = new AccountTypes();
                     var v1 = accID.FirstOrDefault();
                     accTyps.AccIdtyp = v1;
-                    accTyps.AccountType = item;
+                    accTyps.AccountType = Bank.CreateAccount(item).AccountType;
                     db.AccountTypes.Add(accTyps);
                 }
 

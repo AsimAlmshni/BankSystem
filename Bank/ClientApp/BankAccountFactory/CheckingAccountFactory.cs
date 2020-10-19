@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,15 +11,13 @@ namespace Bank.Models
         private double balance;
         private int accountNumber;
 
-        public CheckingAccountFactory(string currency, double balance, int accountNumber)
+        public CheckingAccountFactory(int accountNumber)
         {
-            this.currency = currency;
-            this.balance = balance;
             this.accountNumber = accountNumber;
         }
         public override Account GetBankAccountType()
         {
-            return new CheckingAccount(currency, balance, accountNumber);
+            return new CheckingAccount(accountNumber);
         }
     }
 }

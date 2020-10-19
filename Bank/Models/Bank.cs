@@ -38,22 +38,29 @@ namespace Bank.Models
 
         public virtual ICollection<Client> Client { get; set; }
 
-        public void CreateAccount(string Type, string currency, double balance) 
+        public static Account CreateAccount(string type) 
         {
             int accountNumber = Bank.AccountNumberGenerator();
             BankAccountFactory factory = null;
 
-            switch (Type.ToLower())
+            switch (type.ToLower())
             {
-                case "deposite":
-                    factory = new DepositeAccountFactory(currency, balance, accountNumber);
+                case "deposit":
+                    factory = new DepositeAccountFactory(accountNumber);
                     break;
                 case "checking":
-                    factory = new CheckingAccountFactory(currency, balance, accountNumber);
+                    factory = new CheckingAccountFactory(accountNumber);
+                    break;
+                case "current":
+                    factory = new CheckingAccountFactory(accountNumber);
+                    break;
+                case "saving":
+                    factory = new CheckingAccountFactory(accountNumber);
                     break;
                 default:
                     break;
             }
+            return factory.GetBankAccountType();
         }
 
         public int GetGeneratedNumber() {
