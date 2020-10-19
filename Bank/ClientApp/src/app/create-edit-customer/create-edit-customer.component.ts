@@ -33,7 +33,7 @@ export class CreateEditCustomerComponent implements OnInit {
 
   get moreForms() {
     return this.formBuilder.group({
-      subAccountNumber: "",
+      //subAccountNumber: "",
       currency: "",
       balance: "",
       accountType: ""
