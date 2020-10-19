@@ -103,11 +103,9 @@ export class CreateEditCustomerComponent implements OnInit {
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
     debugger
-    var arrayControl = this.form.get('subAccountNumber') as FormArray;
+    var arrayControl = this.form.value;
 
-    var item = arrayControl.value;
-
-    console.log(item);
+    console.log(arrayControl);
     //tempCustomerWithAccounts.accounts.AccountNumber = this.form.get('subAccountNumber').value;
     //tempCustomerWithAccounts.accounts.Balance = this.form.get('balance').value;
     //tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
