@@ -79,7 +79,7 @@ export class TransactionComponent implements OnInit {
   }
 
 
-  onSubmit(formName: string) {
+  onSubmit(formName: string, accountNo: string) {
     debugger
     if (formName === 'transfer') {
       const tempTransfer: AccountTransfer = new AccountTransfer();
@@ -98,9 +98,13 @@ export class TransactionComponent implements OnInit {
         });
       } else {
         alert("there would be an exchange because currencies not equals");
-        this.transactionService.doTransfer(tempTransfer).subscribe((data) => {
-          this.router.navigate(['/']);
-        });
+
+        if (this.validateAmountTransfered(accountNo, tempTransfer.Amount) >= 0)
+          this.transactionService.doTransfer(tempTransfer).subscribe((data) => {
+            this.router.navigate(['/']);
+          });
+        alert("the transaction couldnot be done trans amount > balance");
+
       }
     } else if (formName === 'deposite') {
       const tempDeposite: AccountTransfer = new AccountTransfer();
@@ -121,12 +125,25 @@ export class TransactionComponent implements OnInit {
 
       var count3 = this.WithdrawForm.get('currencyWithdraw').value;
       var count4 = this.WithdrawForm.get('balanceWithdraw').value;
+      if (this.validateAmountTransfered(accountNo, tempWithdraw.Amount) >= 0)
+        this.transactionService.doWithdraw(tempWithdraw).subscribe((data) => {
+          this.router.navigate(['/']);
+        });
 
-      this.transactionService.doWithdraw(tempWithdraw).subscribe((data) => {
-        this.router.navigate(['/']);
-      });
+      alert("the transaction couldnot be done trans amount > balance");
     }
 
+  }
+
+  validateAmountTransfered(accountNo: string, amount: number) {
+    var temp = 0;
+    var accountData = JSON.parse(JSON.stringify(this.accountDataSource.data));
+    accountData.forEach((data) => {
+      if (data.accountNumber == accountNo) {
+        temp = data.balance;
+      }
+    });
+    return temp - amount;
   }
 
   filterAccount(accountNo: string) {

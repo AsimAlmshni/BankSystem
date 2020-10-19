@@ -111,15 +111,28 @@ namespace Bank.Models
         {
             try
             {
-                var tempAccFrom = (from account in db.Accounts
-                           where (account.AccountNumber == accountTransfer.FromAccount)
-                           select account).FirstOrDefault();
+              var tempAccFrom = (from account in db.Accounts
+                      where (account.AccountNumber == accountTransfer.FromAccount)
+                      select account).FirstOrDefault();
+              var tempAccTo = (from account in db.Accounts
+                                where (account.AccountNumber == accountTransfer.ToAccount)
+                                select account).FirstOrDefault();
+
+            if(tempAccFrom.Currency != tempAccTo.Currency)
+            {
+              var exChane = from exch in db.Currencies
+                      where exch.Currency == tempAccFrom.Currency
+                      select exch.ExchangeRate;
+              var exCh = from ex in db.Currencies
+                        where ex.Currency == tempAccTo.Currency
+                        select ex.ExchangeRate;
+              var tempEx = exChane.FirstOrDefault() / exCh.FirstOrDefault();
+
+              accountTransfer.Amount = accountTransfer.Amount * tempEx;
+            }
+        if (accountTransfer.Amount < tempAccFrom.Balance) {
 
                 tempAccFrom.Balance -= accountTransfer.Amount;
-
-                var tempAccTo = (from account in db.Accounts
-                                 where (account.AccountNumber == accountTransfer.ToAccount)
-                                 select account).FirstOrDefault();
 
                 tempAccTo.Balance += accountTransfer.Amount;
 
@@ -132,7 +145,7 @@ namespace Bank.Models
                 // Aduit records 
                 
                 db.SaveChanges();
-
+              }
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message);
