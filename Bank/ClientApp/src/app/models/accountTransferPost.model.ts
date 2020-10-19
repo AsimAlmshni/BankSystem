@@ -1,5 +1,5 @@
 export class AccountTransfer {
-  accountFrom: string;
-  accountTo: string;
-  amount: number;
+  FromAccount: string;
+  ToAccount: string;
+  Amount: number;
 }

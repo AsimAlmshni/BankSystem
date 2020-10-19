@@ -82,25 +82,38 @@ namespace Bank.Models
             result2.Balance -= amount;
         }
 
-        public void TransferBetweenAccounts(int id, int accountNumberFrom, int accountNumberTo, double amount) 
+        public void DoTransfer(AccountActionHistory accountTransfer) 
         {
-            var temp = (from cust in db.Customer
-                       join acc in db.Accounts
-                       on cust.CustomerId equals acc.CustomerId
-                       where (cust.CustomerId == id && acc.CustomerId == id && acc.AccountNumber == accountNumberFrom.ToString())
-                       select acc).FirstOrDefault();
+            DateTime now = DateTime.Now;
 
-            temp.Balance -= amount;
+            try
+            {
+                var tempAccFrom = (from account in db.Accounts
+                           where (account.AccountNumber == accountTransfer.FromAccount)
+                           select account).FirstOrDefault();
 
-            var temp2 = (from cust in db.Customer
-                         join acc in db.Accounts
-                         on cust.CustomerId equals acc.CustomerId
-                         where (cust.CustomerId == id && acc.CustomerId == id && acc.AccountNumber == accountNumberTo.ToString())
-                         select acc).FirstOrDefault();
+                tempAccFrom.Balance -= accountTransfer.Amount;
 
-            temp.Balance += amount;
+                var tempAccTo = (from account in db.Accounts
+                                 where (account.AccountNumber == accountTransfer.ToAccount)
+                                 select account).FirstOrDefault();
 
-            db.SaveChanges();
+                tempAccTo.Balance += accountTransfer.Amount;
+
+                accountTransfer.Date = now;
+                accountTransfer.AccountsAccId = tempAccFrom.AccId;
+                accountTransfer.ActionType = "transfer";
+                accountTransfer.Currency = tempAccFrom.Currency;
+
+                db.AccountActionHistory.Add(accountTransfer);
+                // Aduit records 
+                
+                db.SaveChanges();
+
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
         }
         public IEnumerable<Customer> GetAllCustomers()
         {

@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bank.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ClientController : ControllerBase, ITransactions
     {
         private BankDataAccessLayer bankDataAccessLayer = new BankDataAccessLayer();
+
 
         public ClientController() {
         }
@@ -35,12 +36,10 @@ namespace Bank.Controllers
             bankDataAccessLayer.UpdateAccountBalance(id, accountNumber.ToString(), amount);
         }
 
-        public void Transfer(int id, int accountNumberFrom, int accountNumberTo, double amount)
+        [HttpPost]
+        public void Transfer(AccountActionHistory accountTransfer)
         {
-            if (AuditTransaction(accountNumberFrom, amount) == true) 
-            {
-                bankDataAccessLayer.TransferBetweenAccounts(id, accountNumberFrom, accountNumberTo, amount);
-            }
+            bankDataAccessLayer.DoTransfer(accountTransfer);
         }
 
         public void Withdraw(int id,int accountNumber, double amount)

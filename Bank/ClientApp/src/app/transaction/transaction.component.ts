@@ -84,11 +84,11 @@ export class TransactionComponent implements OnInit {
     if (formName === 'transfer') {
       const tempTransfer: AccountTransfer = new AccountTransfer();
 
-      tempTransfer.accountFrom = this.form.get('accountFrom').value;
-      tempTransfer.accountTo = this.form.get('accountTo').value;
-      tempTransfer.amount = this.form.get('amount').value;
+      tempTransfer.FromAccount = this.form.get('accountFrom').value;
+      tempTransfer.ToAccount = this.form.get('accountTo').value;
+      tempTransfer.Amount = this.form.get('amount').value;
 
-      tempTransfer.accountFrom = this.form.get('balanceAcc1').value;
+      var blnc = this.form.get('balanceAcc1').value;
       var curren1 = this.form.get('currencyAcc1').value;
       var curren2 = this.form.get('currencyAcc2').value;
 
