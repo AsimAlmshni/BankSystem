@@ -67,10 +67,10 @@
 
 
 
-        <button  id="btnAccTrans" (click)="addMoreForms()" class="pad" mat-icon-button aria-label="addaccountForm">
+        <button  id="btnAddAcc" (click)="addMoreForms()" class="pad" mat-icon-button aria-label="addaccountForm">
           <mat-icon>add_circle_outline</mat-icon>
         </button>
-        <button *ngIf="teamIndex != 0" id="btnAccTrans" (click)="deleteForm(teamIndex)" class="pad" mat-icon-button aria-label="addaccountForm">
+        <button *ngIf="teamIndex != 0" id="btnDelAcc" (click)="deleteForm(teamIndex)" class="pad" mat-icon-button aria-label="addaccountForm">
           <mat-icon>remove_circle_outline</mat-icon>
         </button>
         <hr />

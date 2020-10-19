@@ -103,17 +103,23 @@ export class CreateEditCustomerComponent implements OnInit {
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
     debugger
-    var valu = this.form.get('subAccountNumber').value;
-    tempCustomerWithAccounts.accounts.Balance = this.form.get('balance').value;
-    tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
+    var arrayControl = this.form.get('subAccountNumber') as FormArray;
 
-    tempCustomerWithAccounts.accountTypes = this.form.get('accountType').value;
+    var item = arrayControl.value;
+
+    console.log(item);
+    //tempCustomerWithAccounts.accounts.AccountNumber = this.form.get('subAccountNumber').value;
+    //tempCustomerWithAccounts.accounts.Balance = this.form.get('balance').value;
+    //tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
+
+    //tempCustomerWithAccounts.accountTypes = this.form.get('accountType').value;
 
 
-    this.customerService.createNewCustomer(tempCustomerWithAccounts).subscribe((data) => {
-      this.router.navigate(['/']);
-      console.log(data);
-      debugger;
-    });
+    //this.customerService.createNewCustomer(tempCustomerWithAccounts).subscribe((data) => {
+    //  this.router.navigate(['/']);
+    //  console.log(data);
+    //  debugger;
+    //});
+    debugger
   }
 }
