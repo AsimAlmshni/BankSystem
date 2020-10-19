@@ -12,7 +12,7 @@
   <div *ngIf="selectedValueOp == 'transfer'">
 
     <mat-card>
-      <form [formGroup]="form" (ngSubmit)="onSubmit(selectedValueOp, selectedValueAcc)">
+      <form [formGroup]="form">
         <h3>Transfer Between Accounts</h3>
         <hr>
         <mat-form-field>

@@ -1,6 +1,6 @@
 <p *ngIf="!currencyDataSource"><em>Loading...</em></p>
 <mat-card>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form">
     <mat-form-field class="example-full-width">
       <mat-label>First name</mat-label>
       <input matInput formControlName="name">
