@@ -19,7 +19,7 @@ import { TransactionComponent } from './transaction/transaction.component';
     NavMenuComponent,
     CreateEditCustomerComponent,
     AccountTransactionHistoryComponent,
-    TransactionComponent
+    TransactionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

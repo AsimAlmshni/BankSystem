@@ -21,4 +21,13 @@ export class TransactionService {
   doTransfer(tempAccount: AccountTransfer): Observable<HttpResponse<any>> {
     return this.http.post<HttpResponse<any>>('api/Client/doTransfer', tempAccount);
   }
+
+  doDeposite(tempAccount: Account): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<any>>('api/Client/doDeposite', tempAccount);
+  }
+
+  doWithdraw(tempAccount: Account): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<any>>('api/Client/doWithdraw', tempAccount);
+  }
+
 }

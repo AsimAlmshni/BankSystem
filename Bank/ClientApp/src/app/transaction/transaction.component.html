@@ -8,53 +8,167 @@
 </mat-form-field>
 
 
+<div>
+  <div *ngIf="selectedValueOp == 'transfer'">
 
-<div *ngIf="selectedValueOp == 'transfer'">
+    <mat-card>
+      <form [formGroup]="form" (ngSubmit)="onSubmit(selectedValueOp)">
+        <h3>Transfer Between Accounts</h3>
+        <hr>
+        <mat-form-field>
+          <mat-label>Account From</mat-label>
+          <mat-select [(ngModel)]="selectedValue" matNativeControl matInput formControlName="accountFrom" (selectionChange)='filterAccountTransfer(selectedValue)' required>
+            <mat-option *ngFor="let accountFrom of accountDataSource.data" [value]="accountFrom.accountNumber">{{ accountFrom.accountNumber }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <mat-card>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <h3>Transfer Between Accounts</h3>
-      <hr>
-      <mat-form-field>
-        <mat-label>Account From</mat-label>
-        <mat-select [(ngModel)]="selectedValue" matNativeControl matInput formControlName="accountFrom" required>
-          <mat-option *ngFor="let accountFrom of accountDataSource.data" [value]="accountFrom.accountNumber">{{ accountFrom.accountNumber }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Balance</mat-label>
+          <input matInput formControlName="balanceAcc1" [(ngModel)]="filteredAccountTransferDS.Balance" [value]="filteredAccountTransferDS.Balance" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Currency</mat-label>
+          <input matInput formControlName="currencyAcc1" [(ngModel)]="filteredAccountTransferDS.Currency" [value]="filteredAccountTransferDS.Currency" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Account To</mat-label>
+          <mat-select [(ngModel)]="selectedValue2" matNativeControl matInput formControlName="accountTo" (selectionChange)='filterAccountTransferAcc2(selectedValue2)' required>
+            <mat-option *ngFor="let accountTo of accountDataSource.data" [value]="accountTo.accountNumber">{{ accountTo.accountNumber }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Currency</mat-label>
+          <input matInput formControlName="currencyAcc2" [(ngModel)]="filteredAccountTransferAcc2DS.Currency" [value]="filteredAccountTransferAcc2DS.Currency" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amount">
+        </mat-form-field>
+
+        <hr>
+        <!-------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
-      <mat-form-field>
-        <mat-label>Account To</mat-label>
-        <mat-select [(ngModel)]="selectedValue2" matNativeControl matInput formControlName="accountTo" required>
-          <mat-option *ngFor="let accountTo of accountDataSource.data" [value]="accountTo.accountNumber">{{ accountTo.accountNumber }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      </form>
+      <div class="form-group commands">
 
+        <button type="submit"
+                (click)="onSubmit(selectedValueOp)"
+                [disabled]="form.invalid"
+                class="btn btn-success">
+          Transfer
+        </button>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Amount</mat-label>
-        <input matInput formControlName="amount">
-      </mat-form-field>
+        <button type="button"
+                [routerLink]="['/customers']"
+                class="btn">
+          Cancel
+        </button>
+      </div>
+    </mat-card>
+  </div>
 
-      <hr>
-      <!-------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <!-- ---------------------------------------------DEPOSIITE--------------------------------------------------------- -->
+  <div *ngIf="selectedValueOp == 'deposite'">
 
+    <mat-card>
+      <form [formGroup]="depositeForm" (ngSubmit)="onSubmit(selectedValueOp)">
+        <h3>Deposite</h3>
+        <hr>
+        <mat-form-field>
 
-    </form>
-    <div class="form-group commands">
+          <mat-label>Account</mat-label>
+          <mat-select [(ngModel)]="selectedValueAcc" matNativeControl matInput formControlName="account" (selectionChange)='filterAccount(selectedValueAcc)' required>
+            <mat-option *ngFor="let account of accountDataSource.data" [value]="account.accountNumber">{{ account.accountNumber }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <button type="submit"
-              (click)="onSubmit()"
-              [disabled]="form.invalid"
-              class="btn btn-success">
-        Transfer
-      </button>
+        <mat-form-field>
+          <mat-label>Currency</mat-label>
+          <input matInput formControlName="currency" [value]="filteredAccountDS.Currency" readonly>
+        </mat-form-field>
 
-      <button type="button"
-              [routerLink]="['/customers']"
-              class="btn">
-        Cancel
-      </button>
-    </div>
-  </mat-card>
+        <mat-form-field>
+          <mat-label>Balance</mat-label>
+          <input matInput formControlName="balance" [value]="filteredAccountDS.Balance" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amount">
+        </mat-form-field>
+
+        <hr>
+      </form>
+      <div class="form-group commands">
+
+        <button type="submit"
+                (click)="onSubmit(selectedValueOp)"
+                [disabled]="form.invalid"
+                class="btn btn-success">
+          Transfer
+        </button>
+
+        <button type="button"
+                [routerLink]="['/customers']"
+                class="btn">
+          Cancel
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  <!-- ---------------------------------------------WithDraw--------------------------------------------------------- -->
+
+  <div *ngIf="selectedValueOp == 'withdraw'">
+    <mat-card>
+      <form [formGroup]="WithdrawForm" (ngSubmit)="onSubmit(selectedValueOp)">
+        <h3>Withdraw</h3>
+        <hr>
+        <mat-form-field>
+
+          <mat-label>Account</mat-label>
+          <mat-select [(ngModel)]="selectedValueAcc" matNativeControl matInput formControlName="accountWithdraw" (selectionChange)='filterAccountWithdraw(selectedValueAcc)' required>
+            <mat-option *ngFor="let account of accountDataSource.data" [value]="account.accountNumber">{{ account.accountNumber }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Currency</mat-label>
+          <input matInput formControlName="currencyWithdraw" [value]="filteredAccountWithdrawDS.Currency" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Balance</mat-label>
+          <input matInput formControlName="balanceWithdraw" [value]="filteredAccountWithdrawDS.Balance" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amountWithdraw">
+        </mat-form-field>
+
+        <hr>
+      </form>
+      <div class="form-group commands">
+
+        <button type="submit"
+                (click)="onSubmit(selectedValueOp)"
+                [disabled]="form.invalid"
+                class="btn btn-success">
+          Transfer
+        </button>
+
+        <button type="button"
+                [routerLink]="['/customers']"
+                class="btn">
+          Cancel
+        </button>
+      </div>
+    </mat-card>
+
+  </div>
 </div>
