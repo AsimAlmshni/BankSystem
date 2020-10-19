@@ -49,7 +49,7 @@
       <input matInput formControlName="balance">
     </mat-form-field>
 
-    <mat-form-field >
+    <mat-form-field>
       <mat-label>Account Type</mat-label>
       <mat-select formControlName="accountType" multiple>
         <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
@@ -57,27 +57,92 @@
     </mat-form-field>
 
     <!--<mat-form-field>
-      <mat-label>Account Type</mat-label>
-      <mat-select [(ngModel)]="selectedValueDS" matNativeControl matInput formControlName="accountType" required>
-        <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{ accTypDS.accountType }}</mat-option>
-      </mat-select>
-    </mat-form-field>-->
-        <!--<mat-select-trigger>
-          {{toppings.value ? toppings.value[0] : ''}}
-          <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
-            (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-          </span>
-        </mat-select-trigger>-->
+    <mat-label>Account Type</mat-label>
+    <mat-select [(ngModel)]="selectedValueDS" matNativeControl matInput formControlName="accountType" required>
+      <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{ accTypDS.accountType }}</mat-option>
+    </mat-select>
+  </mat-form-field>-->
+    <!--<mat-select-trigger>
+    {{toppings.value ? toppings.value[0] : ''}}
+    <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
+      (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+    </span>
+  </mat-select-trigger>-->
+    <!--<div formArrayName="teams">
+    <div class="teams"
+         *ngFor="
+        let team of form.get('teams').controls;
+        let teamIndex = index
+      "
+         [formGroupName]="teamIndex">
+      <label>
+        Team Name <input formControlName="team_name" />
+      </label>
+        </div>
+    </div>-->
 
-    <div class="addMoreAccount"></div>
 
-    <button style="float: right;" *ngIf="!id" type="submit"
-            (click)="addAddAccountFrom()"
-            class="btn btn-success">
-      Add More
-    </button>
+    <hr />
+    <button type="button" (click)="addMoreForms()">Add Team</button>
+    <div formArrayName="moreForms">
+      <div class="moreForms"
+           *ngFor="
+        let team of form.get('moreForms').controls;
+        let teamIndex = index
+      "
+           [formGroupName]="teamIndex">
 
-  </form> 
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Account Number</mat-label>
+          <input matInput formControlName="subAccountNumber" [(ngModel)]="autoGenSubNumber" [value]="autoGenSubNumber" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Currency</mat-label>
+          <mat-select [(ngModel)]="selectedValueCurrency" matNativeControl matInput formControlName="currency" required>
+            <mat-option *ngFor="let curren of currencyDataSource" [value]="curren.currency">{{ curren.currency }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<mat-form-field class="example-full-width">
+      <mat-label>Currency</mat-label>
+      <input matInput formControlName="mainCurrency">
+  </mat-form-field>-->
+        <mat-form-field class="example-full-width">
+          <mat-label>Balance</mat-label>
+          <input matInput formControlName="balance">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Account Type</mat-label>
+          <mat-select formControlName="accountType" multiple>
+            <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+
+        <button id="btnAccTrans" (click)="addMoreForms()" class="pad" mat-icon-button aria-label="addaccountForm">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+        <button id="btnAccTrans" (click)="deleteForm(teamIndex)" class="pad" mat-icon-button aria-label="addaccountForm">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+        <hr />
+      </div>
+      </div>
+    
+
+
+
+
+        <button style="float: right;" *ngIf="!id" type="submit"
+                (click)="addAddAccountFrom()"
+                class="btn btn-success">
+          Add More
+        </button>
+
+  </form>
   <div class="form-group commands">
     <!--<mat-card-actions>
       <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
@@ -96,4 +161,3 @@
     </button>
   </div>
 </mat-card>
-

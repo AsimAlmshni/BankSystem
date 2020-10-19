@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CustomerService } from '../core/services/customer.service';
 import { CustomerModel } from '../models/customer.model';
 import { CurrencyModel } from '../models/currency.model'
@@ -19,7 +19,7 @@ export class CreateEditCustomerComponent implements OnInit {
   form: FormGroup;
   currencyDataSource: CurrencyModel[];
   accountTypesDS: AccountTypesDS[];
-
+  accountForm: Account;
 
   autoGenNumber: string;
   autoGenSubNumber: string;
@@ -31,8 +31,26 @@ export class CreateEditCustomerComponent implements OnInit {
 
   }
 
+  get moreForms() {
+    this.accountForm = new Account();
+    return this.formBuilder.group({
+      subAccountNumber: "",
+      currency: "",
+      balance: "",
+      accountType: ""
+      });
+  }
+
+  addMoreForms() {
+    (this.form.get("moreForms") as FormArray).push(this.moreForms);
+  }
+
+  deleteForm(index) {
+    (this.form.get("moreForms") as FormArray).removeAt(index);
+  }
 
   ngOnInit() {
+
 
     this.customerService.getCurrenciesList().subscribe((data: CurrencyModel[]) => {
       this.currencyDataSource = data;
@@ -63,8 +81,10 @@ export class CreateEditCustomerComponent implements OnInit {
       currency: ['', Validators.compose([Validators.required])],
 
       accountType: ['', Validators.compose([Validators.required])]
+      ,moreForms: this.formBuilder.array([])
     })
   }
+  
 
 
   onSubmit() {
@@ -84,7 +104,7 @@ export class CreateEditCustomerComponent implements OnInit {
     tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
 
     tempCustomerWithAccounts.accountTypes = this.form.get('accountType').value;
-      
+
 
     this.customerService.createNewCustomer(tempCustomerWithAccounts).subscribe((data) => {
       this.router.navigate(['/']);
