@@ -1,0 +1,60 @@
+<p *ngIf="!accountDataSource"><em>Loading...</em></p>
+
+<mat-form-field>
+  <mat-label>Select Transaction Operation</mat-label>
+  <mat-select [(ngModel)]="selectedValueOp" matNativeControl matInput required>
+    <mat-option *ngFor="let operation of displayedAccountsOperation" [value]="operation">{{ operation }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
+<div *ngIf="selectedValueOp == 'transfer'">
+
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h3>Transfer Between Accounts</h3>
+      <hr>
+      <mat-form-field>
+        <mat-label>Account From</mat-label>
+        <mat-select [(ngModel)]="selectedValue" matNativeControl matInput formControlName="accountFrom" required>
+          <mat-option *ngFor="let accountFrom of accountDataSource.data" [value]="accountFrom.accountNumber">{{ accountFrom.accountNumber }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Account To</mat-label>
+        <mat-select [(ngModel)]="selectedValue2" matNativeControl matInput formControlName="accountTo" required>
+          <mat-option *ngFor="let accountTo of accountDataSource.data" [value]="accountTo.accountNumber">{{ accountTo.accountNumber }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="amount">
+      </mat-form-field>
+
+      <hr>
+      <!-------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+    </form>
+    <div class="form-group commands">
+
+      <button type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Transfer
+      </button>
+
+      <button type="button"
+              [routerLink]="['/customers']"
+              class="btn">
+        Cancel
+      </button>
+    </div>
+  </mat-card>
+</div>

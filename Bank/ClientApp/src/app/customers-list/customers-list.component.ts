@@ -66,6 +66,11 @@ export class CustomersListComponent implements OnInit {
     location.href = "/transHistory/view/" + id;
   }
 
+  doTransaction(id: number) {
+    debugger
+    location.href = "/transaction/" + id;
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

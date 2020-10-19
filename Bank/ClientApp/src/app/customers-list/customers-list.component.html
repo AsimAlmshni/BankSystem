@@ -38,6 +38,9 @@
         <button id="btnAccHis" (click)="variable.a = false;getCustomerTransHistory(element.customerId)" class="pad" mat-icon-button aria-label="Go to Customer History">
           <mat-icon>open_in_new</mat-icon>
         </button>
+        <button id="btnAccTrans" (click)="variable.a = false;doTransaction(element.customerId)" class="pad" mat-icon-button aria-label="doTransaction">
+          <mat-icon>import_export</mat-icon>
+        </button>
       </td>
     </ng-container>
 

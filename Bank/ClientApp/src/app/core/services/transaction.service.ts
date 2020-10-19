@@ -5,6 +5,7 @@ import { CustomerModel } from '../../models/customer.model';
 import { CurrencyModel } from '../../models/currency.model';
 import { Account } from '../../models/account.model';
 import { CustomerTransactionsHistory } from '../../models/trasactions-history.model';
+import { AccountTransfer } from '../../models/accountTransferPost.model';
 
 
 @Injectable({
@@ -17,4 +18,7 @@ export class TransactionService {
     return this.http.get<CustomerTransactionsHistory[]>('api/AccountActionHistory/GetTransactions');
   }
 
+  doTransfer(tempAccount: AccountTransfer): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<any>>('api/Client/doTransfer', tempAccount);
+  }
 }
