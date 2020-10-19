@@ -14,6 +14,7 @@ namespace Bank.Models
     internal class BankDataAccessLayer
     {
         BankContext db = new BankContext();
+        DateTime now = DateTime.Now;
 
         public dynamic GetAccountsBalance(int id ) {
 
@@ -54,19 +55,29 @@ namespace Bank.Models
             return from accTransHis in db.AccountActionHistory select accTransHis;
         }
 
-        public void UpdateAccountBalance(int id, string accountNumber, double amount) 
+        public void UpdateAccountBalance(AccountActionHistory account) 
         {
-            var result = (from cust in db.Customer
-                         where (cust.CustomerId == id)
-                         select cust).FirstOrDefault();
-            result.TotalBalance += amount;
+            try
+            {
+                var result = (from acc in db.Accounts
+                             where (acc.AccountNumber == account.FromAccount.ToString())
+                             select acc).FirstOrDefault();
 
-            var result2 = (from acc in db.Accounts
-                          where (acc.CustomerId == id && acc.AccountNumber == accountNumber)
-                          select acc).FirstOrDefault();
-            result2.Balance += amount;
+                result.Balance += account.Amount;
 
-            db.SaveChanges();
+                account.AccountsAccId = result.AccId;
+                account.Date = now;
+                account.ActionType = "deposite";
+                account.Currency = result.Currency;
+
+                db.AccountActionHistory.Add(account);
+
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void UpdateAfterWithdraw(int id, string accountNumber, double amount) 
@@ -84,8 +95,6 @@ namespace Bank.Models
 
         public void DoTransfer(AccountActionHistory accountTransfer) 
         {
-            DateTime now = DateTime.Now;
-
             try
             {
                 var tempAccFrom = (from account in db.Accounts

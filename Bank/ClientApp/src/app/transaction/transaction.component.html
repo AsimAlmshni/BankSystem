@@ -89,12 +89,12 @@
 
         <mat-form-field>
           <mat-label>Currency</mat-label>
-          <input matInput formControlName="currency" [value]="filteredAccountDS.Currency" readonly>
+          <input matInput formControlName="currency" [(ngModel)]="filteredAccountDS.Currency" [value]="filteredAccountDS.Currency" readonly>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Balance</mat-label>
-          <input matInput formControlName="balance" [value]="filteredAccountDS.Balance" readonly>
+          <input matInput formControlName="balance" [(ngModel)]="filteredAccountDS.Balance" [value]="filteredAccountDS.Balance" readonly>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -108,7 +108,7 @@
 
         <button type="submit"
                 (click)="onSubmit(selectedValueOp)"
-                [disabled]="form.invalid"
+                [disabled]="depositeForm.invalid"
                 class="btn btn-success">
           Transfer
         </button>
@@ -138,12 +138,12 @@
 
         <mat-form-field>
           <mat-label>Currency</mat-label>
-          <input matInput formControlName="currencyWithdraw" [value]="filteredAccountWithdrawDS.Currency" readonly>
+          <input matInput formControlName="currencyWithdraw" [(ngModel)]="filteredAccountWithdrawDS.Currency" [value]="filteredAccountWithdrawDS.Currency" readonly>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Balance</mat-label>
-          <input matInput formControlName="balanceWithdraw" [value]="filteredAccountWithdrawDS.Balance" readonly>
+          <input matInput formControlName="balanceWithdraw" [(ngModel)]="filteredAccountWithdrawDS.Balance" [value]="filteredAccountWithdrawDS.Balance" readonly>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -157,7 +157,7 @@
 
         <button type="submit"
                 (click)="onSubmit(selectedValueOp)"
-                [disabled]="form.invalid"
+                [disabled]="WithdrawForm.invalid"
                 class="btn btn-success">
           Transfer
         </button>

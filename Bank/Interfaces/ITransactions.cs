@@ -7,7 +7,7 @@ namespace Bank.Models
 {
     interface ITransactions
     {
-        public void Deposite(int id, int accountNumber, double amount);
+        public void Deposite(AccountActionHistory account);
         public void Transfer(AccountActionHistory accountTransfer);
         public void Withdraw(int id, int accountNumberFrom, double aamount);
         public bool AuditTransaction(int accountNumber, double amount);

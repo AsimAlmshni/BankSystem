@@ -103,24 +103,25 @@ export class TransactionComponent implements OnInit {
         });
       }
     } else if (formName === 'deposite') {
-      const tempDeposite: Account = new Account();
+      const tempDeposite: AccountTransfer = new AccountTransfer();
+      debugger
+      tempDeposite.FromAccount = this.depositeForm.get('account').value;
+      tempDeposite.Amount = this.depositeForm.get('amount').value;
 
-
-      tempDeposite.AccountNumber = this.form.get('account').value;
-      tempDeposite.Currency = this.form.get('currency').value;
-      tempDeposite.Balance = this.form.get('amount').value;
-
+      var count1 = this.depositeForm.get('currency').value;
+      var count2 = this.depositeForm.get('balance').value;
 
       this.transactionService.doDeposite(tempDeposite).subscribe((data) => {
         this.router.navigate(['/']);
       });
     } else if (formName === 'withdraw') {
-      const tempWithdraw: Account = new Account();
+      const tempWithdraw: AccountTransfer = new AccountTransfer();
 
+      tempWithdraw.FromAccount = this.WithdrawForm.get('accountWithdraw').value;
+      tempWithdraw.Amount = this.WithdrawForm.get('amountWithdraw').value;
 
-      tempWithdraw.AccountNumber = this.form.get('accountWithdraw').value;
-      tempWithdraw.Currency = this.form.get('currencyWithdraw').value;
-      tempWithdraw.Balance = this.form.get('amountWithdraw').value;
+      var count3 = this.WithdrawForm.get('currencyWithdraw').value;
+      var count4 = this.WithdrawForm.get('balanceWithdraw').value;
 
       this.transactionService.doWithdraw(tempWithdraw).subscribe((data) => {
         this.router.navigate(['/']);

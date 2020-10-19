@@ -31,9 +31,10 @@ namespace Bank.Controllers
                 return false;
         }
 
-        public void Deposite(int id ,int accountNumber, double amount)
+        [HttpPost]
+        public void Deposite(AccountActionHistory account)
         {
-            bankDataAccessLayer.UpdateAccountBalance(id, accountNumber.ToString(), amount);
+            bankDataAccessLayer.UpdateAccountBalance(account);
         }
 
         [HttpPost]
