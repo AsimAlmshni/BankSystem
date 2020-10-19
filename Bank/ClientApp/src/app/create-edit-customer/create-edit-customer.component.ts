@@ -38,7 +38,7 @@ export class CreateEditCustomerComponent implements OnInit {
       currency: "",
       balance: "",
       accountType: ""
-      });
+    });
   }
 
   addMoreForms() {
@@ -50,7 +50,6 @@ export class CreateEditCustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-
 
     this.customerService.getCurrenciesList().subscribe((data: CurrencyModel[]) => {
       this.currencyDataSource = data;
@@ -76,12 +75,17 @@ export class CreateEditCustomerComponent implements OnInit {
       MainAccountNumber: ['', Validators.compose([Validators.required])],
       totalBalance: ['', Validators.compose([Validators.required])],
 
-      subAccountNumber: ['', Validators.compose([Validators.required])],
-      balance: ['', Validators.compose([Validators.required])],
-      currency: ['', Validators.compose([Validators.required])],
+      //subAccountNumber: ['', Validators.compose([Validators.required])],
+      //balance: ['', Validators.compose([Validators.required])],
+      //currency: ['', Validators.compose([Validators.required])],
 
-      accountType: ['', Validators.compose([Validators.required])]
-      ,moreForms: this.formBuilder.array([])
+      //accountType: ['', Validators.compose([Validators.required])]
+        moreForms: this.formBuilder.array([{
+        subAccountNumber: "",
+        currency: "",
+        balance: "",
+        accountType: ""
+      }])
     })
   }
   
