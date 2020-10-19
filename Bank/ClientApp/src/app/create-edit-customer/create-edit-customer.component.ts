@@ -32,7 +32,6 @@ export class CreateEditCustomerComponent implements OnInit {
   }
 
   get moreForms() {
-    this.accountForm = new Account();
     return this.formBuilder.group({
       subAccountNumber: "",
       currency: "",
@@ -80,12 +79,7 @@ export class CreateEditCustomerComponent implements OnInit {
       //currency: ['', Validators.compose([Validators.required])],
 
       //accountType: ['', Validators.compose([Validators.required])]
-        moreForms: this.formBuilder.array([{
-        subAccountNumber: "",
-        currency: "",
-        balance: "",
-        accountType: ""
-      }])
+      moreForms: this.formBuilder.array([this.moreForms])
     })
   }
   

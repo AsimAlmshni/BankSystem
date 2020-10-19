@@ -41,12 +41,12 @@
 
         <mat-form-field class="example-full-width">
           <mat-label>Account Number</mat-label>
-          <input matInput formControlName="subAccountNumber{{ i }}" [(ngModel)]="autoGenSubNumber" [value]="autoGenSubNumber" readonly>
+          <input matInput formControlName="subAccountNumber" [value]="autoGenSubNumber" readonly>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Currency</mat-label>
-          <mat-select [(ngModel)]="selectedValueCurrency" matNativeControl matInput formControlName="currency{{ i }}" required>
+          <mat-select matNativeControl matInput formControlName="currency" required>
             <mat-option *ngFor="let curren of currencyDataSource" [value]="curren.currency">{{ curren.currency }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -54,12 +54,12 @@
 
         <mat-form-field class="example-full-width">
           <mat-label>Balance</mat-label>
-          <input matInput formControlName="balance{{ i }}">
+          <input matInput formControlName="balance">
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Account Type</mat-label>
-          <mat-select formControlName="accountType{{ i }}" multiple>
+          <mat-select formControlName="accountType" multiple>
             <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
           </mat-select>
         </mat-form-field>
