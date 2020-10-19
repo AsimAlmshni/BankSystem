@@ -65,6 +65,7 @@ namespace Bank.Models
 
                 result.Balance += account.Amount;
 
+                account.ToAccount = account.FromAccount;
                 account.AccountsAccId = result.AccId;
                 account.Date = now;
                 account.ActionType = "deposite";
@@ -80,17 +81,30 @@ namespace Bank.Models
             }
         }
 
-        public void UpdateAfterWithdraw(int id, string accountNumber, double amount) 
+        public void UpdateAfterWithdraw(AccountActionHistory account) 
         {
-            var result = (from cust in db.Customer
-                          where (cust.CustomerId == id)
-                          select cust).FirstOrDefault();
-            result.TotalBalance -= amount;
+            try
+            {
+                var result = (from acc in db.Accounts
+                              where (acc.AccountNumber == account.FromAccount.ToString())
+                              select acc).FirstOrDefault();
 
-            var result2 = (from acc in db.Accounts
-                           where (acc.CustomerId == id && acc.AccountNumber == accountNumber)
-                           select acc).FirstOrDefault();
-            result2.Balance -= amount;
+                result.Balance -= account.Amount;
+
+                account.ToAccount = account.FromAccount;
+                account.AccountsAccId = result.AccId;
+                account.Date = now;
+                account.ActionType = "withdraw";
+                account.Currency = result.Currency;
+
+                db.AccountActionHistory.Add(account);
+
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void DoTransfer(AccountActionHistory accountTransfer) 

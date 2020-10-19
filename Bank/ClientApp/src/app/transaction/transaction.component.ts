@@ -104,7 +104,6 @@ export class TransactionComponent implements OnInit {
       }
     } else if (formName === 'deposite') {
       const tempDeposite: AccountTransfer = new AccountTransfer();
-      debugger
       tempDeposite.FromAccount = this.depositeForm.get('account').value;
       tempDeposite.Amount = this.depositeForm.get('amount').value;
 

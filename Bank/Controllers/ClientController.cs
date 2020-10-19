@@ -17,19 +17,6 @@ namespace Bank.Controllers
 
         public ClientController() {
         }
-        public bool AuditTransaction(int accountNumberFrom, double amount)
-        {
-
-            DateTime localDate = DateTime.Now;
-            DateTime utcDate = DateTime.UtcNow;
-
-            var accAmt  = bankDataAccessLayer.GetAccountsBalance(accountNumberFrom);
-
-            if (accAmt >= amount)
-                return true;
-            else
-                return false;
-        }
 
         [HttpPost]
         public void Deposite(AccountActionHistory account)
@@ -43,12 +30,10 @@ namespace Bank.Controllers
             bankDataAccessLayer.DoTransfer(accountTransfer);
         }
 
-        public void Withdraw(int id,int accountNumber, double amount)
+        [HttpPost]
+        public void Withdraw(AccountActionHistory account)
         {
-            if (AuditTransaction(accountNumber, amount) == true)
-            {
-                bankDataAccessLayer.UpdateAfterWithdraw(id, accountNumber.ToString(), amount);
-            }
+            bankDataAccessLayer.UpdateAfterWithdraw(account);
         }
     }
 }
