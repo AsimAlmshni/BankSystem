@@ -97,13 +97,13 @@ export class CreateEditCustomerComponent implements OnInit {
 
     tempCustomerWithAccounts.accounts = new Account();
     tempCustomerWithAccounts.customer = new CustomerModel();
-
     tempCustomerWithAccounts.customer.CustomerName = this.form.get('name').value;
     tempCustomerWithAccounts.customer.MainCurrency = this.form.get('mainCurrency').value;
     tempCustomerWithAccounts.customer.MainAccountNumber = this.form.get('MainAccountNumber').value;
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
-    tempCustomerWithAccounts.accounts.AccountNumber = this.form.get('subAccountNumber').value;
+    debugger
+    var valu = this.form.get('subAccountNumber').value;
     tempCustomerWithAccounts.accounts.Balance = this.form.get('balance').value;
     tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
 
