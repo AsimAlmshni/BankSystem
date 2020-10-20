@@ -137,6 +137,7 @@ export class TransactionComponent implements OnInit {
 
   validateAmountTransfered(accountNo: string, amount: number) {
     var temp = 0;
+    debugger
     var accountData = JSON.parse(JSON.stringify(this.accountDataSource.data));
     accountData.forEach((data) => {
       if (data.accountNumber == accountNo) {

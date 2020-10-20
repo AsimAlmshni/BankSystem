@@ -57,7 +57,7 @@
       <div class="form-group commands">
 
         <button type="submit"
-                (click)="onSubmit(selectedValueOp, selectedValueAcc)"
+                (click)="onSubmit(selectedValueOp, selectedValue)"
                 [disabled]="form.invalid"
                 class="btn btn-success">
           Transfer
@@ -76,7 +76,7 @@
   <div *ngIf="selectedValueOp == 'deposite'">
 
     <mat-card>
-      <form [formGroup]="depositeForm" (ngSubmit)="onSubmit(selectedValueOp, selectedValueAcc)">
+      <form [formGroup]="depositeForm">
         <h3>Deposite</h3>
         <hr>
         <mat-form-field>
@@ -125,7 +125,7 @@
 
   <div *ngIf="selectedValueOp == 'withdraw'">
     <mat-card>
-      <form [formGroup]="WithdrawForm" (ngSubmit)="onSubmit(selectedValueOp, selectedValueAcc)">
+      <form [formGroup]="WithdrawForm">
         <h3>Withdraw</h3>
         <hr>
         <mat-form-field>
