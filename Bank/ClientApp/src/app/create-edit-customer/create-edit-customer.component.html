@@ -59,7 +59,7 @@
 
         <mat-form-field>
           <mat-label>Account Type</mat-label>
-          <mat-select formControlName="accountTpe" multiple>
+          <mat-select formControlName="accountTypes" multiple>
             <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
           </mat-select>
         </mat-form-field>

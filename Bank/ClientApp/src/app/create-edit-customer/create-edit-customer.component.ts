@@ -21,9 +21,13 @@ export class CreateEditCustomerComponent implements OnInit {
   accountTypesDS: AccountTypesDS[];
   accountForm: Account;
 
+  //accountDataForm: Account;
+  //accountTypesDataForm: AccountType;
+
   autoGenNumber: string;
   autoGenSubNumber: string;
   selectedCurrency: string;
+
 
   constructor(private formBuilder: FormBuilder,
     private customerService: CustomerService,
@@ -36,7 +40,7 @@ export class CreateEditCustomerComponent implements OnInit {
       //subAccountNumber: "",
       currency: "",
       balance: "",
-      accountTpe: ""
+      accountTypes: ""
     });
   }
 
@@ -86,16 +90,32 @@ export class CreateEditCustomerComponent implements OnInit {
 
 
   onSubmit() {
-    debugger
     const tempCustomerWithAccounts: CustomerWithAccounts = new CustomerWithAccounts();
 
     tempCustomerWithAccounts.customer = new CustomerModel();
+
     tempCustomerWithAccounts.customer.CustomerName = this.form.get('name').value;
     tempCustomerWithAccounts.customer.MainCurrency = this.form.get('mainCurrency').value;
     tempCustomerWithAccounts.customer.MainAccountNumber = this.form.get('MainAccountNumber').value;
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
-    var x = this.form.get('moreForms').value;
+    var addAccountFormData = this.form.get('moreForms').value;
+
+    debugger 
+
+
+    for (let i = 0; i < addAccountFormData.length; i++) {
+      var accountDataForm = new Account();
+      var accountTypesDataForm = new AccountType();
+
+      accountDataForm.Balance = addAccountFormData[i].balance;
+      accountDataForm.Currency = addAccountFormData[i].currency;
+
+      accountTypesDataForm = addAccountFormData[i].accountTypes;
+
+      tempCustomerWithAccounts.accounts.push(accountDataForm);
+      tempCustomerWithAccounts.accountTypes.push(accountTypesDataForm);
+    }
 
     console.log(tempCustomerWithAccounts);
     //tempCustomerWithAccounts.accounts.AccountNumber = this.form.get('subAccountNumber').value;
@@ -105,11 +125,11 @@ export class CreateEditCustomerComponent implements OnInit {
     //tempCustomerWithAccounts.accountTypes = this.form.get('accountType').value;
 
 
-    //this.customerService.createNewCustomer(tempCustomerWithAccounts).subscribe((data) => {
-    //  this.router.navigate(['/']);
-    //  console.log(data);
-    //  debugger;
-    //});
+    this.customerService.createNewCustomer(tempCustomerWithAccounts).subscribe((data) => {
+      this.router.navigate(['/']);
+      console.log(data);
+      debugger;
+    });
     debugger
 
   }
