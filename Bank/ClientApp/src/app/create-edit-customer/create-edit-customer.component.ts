@@ -39,25 +39,17 @@ export class CreateEditCustomerComponent implements OnInit {
     return this.formBuilder.group({
       //subAccountNumber: "",
       currency: "",
-      balance: ""
-    });
-  }
-
-  get moreTypeForms() {
-    return this.formBuilder.group({
+      balance: "",
       accountTypes: ""
     });
   }
 
   addMoreForms() {
     (this.form.get("moreForms") as FormArray).push(this.moreForms);
-    (this.form.get("moreTypeForms") as FormArray).push(this.moreTypeForms);
   }
 
   deleteForm(index) {
     (this.form.get("moreForms") as FormArray).removeAt(index);
-    (this.form.get("moreTypeForms") as FormArray).removeAt(index);
-
   }
 
   ngOnInit() {
@@ -86,7 +78,6 @@ export class CreateEditCustomerComponent implements OnInit {
       MainAccountNumber: ['', Validators.compose([Validators.required])],
       totalBalance: ['', Validators.compose([Validators.required])],
       moreForms: this.formBuilder.array([this.moreForms]),
-      moreTypeForms: this.formBuilder.array([this.moreTypeForms])
 
 
       //subAccountNumber: ['', Validators.compose([Validators.required])],
@@ -96,7 +87,7 @@ export class CreateEditCustomerComponent implements OnInit {
       //accountType: ['', Validators.compose([Validators.required])]
     })
   }
-  
+
 
 
   onSubmit() {
@@ -110,10 +101,9 @@ export class CreateEditCustomerComponent implements OnInit {
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
     tempCustomerWithAccounts.accounts = this.form.get('moreForms').value;
-    tempCustomerWithAccounts.accountTypes = this.form.get('moreTypeForms').value;
 
 
-    debugger 
+    debugger
 
     //for (let i = 0; i < addAccountFormData.length; i++) {
     //  var accountDataForm = new Account();

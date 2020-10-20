@@ -200,26 +200,34 @@ namespace Bank.Models
                                  select cust.CustomerId;
 
                 var generatedAccountNumber = Bank.Instance.GetGeneratedNumber().ToString();
+
                 foreach (var item in customer.accounts)
                 {
-                    item.CustomerId = customerID.FirstOrDefault();
-                    item.AccountNumber = generatedAccountNumber;
-                    db.Accounts.Add(item);
+                    Accounts tempAaccount = new Accounts();
+                    tempAaccount.Balance = item.Balance;
+                    tempAaccount.Currency = item.Currency;
+                    tempAaccount.CustomerId = customerID.FirstOrDefault();
+                    tempAaccount.AccountNumber = generatedAccountNumber;
+
+                    db.Accounts.Add(tempAaccount);
                     db.SaveChanges();
 
                     var accID = from acc in db.Accounts
                                 where acc.CustomerId == customer.customer.CustomerId
                                 select acc.AccId;
 
-                    foreach (var itemType in customer.accountTypes)
+                    foreach (var itemType in customer.accounts)
                     {
-                        AccountTypes accTyps = new AccountTypes();
-                        var v1 = accID.FirstOrDefault();
-                        accTyps.AccIdtyp = v1;
-                        var genAcc = Bank.CreateAccount(itemType.ToString());
-                        accTyps.AccountType = genAcc.AccountType;
-                        generatedAccountNumber = genAcc.AccountNumber.ToString();
-                        db.AccountTypes.Add(accTyps);
+                        foreach (var typ in itemType.accountTypes)
+                        {
+                            AccountTypes accTyps = new AccountTypes();
+                            var v1 = accID.FirstOrDefault();
+                            accTyps.AccIdtyp = v1;
+                            var genAcc = Bank.CreateAccount(typ.ToString());
+                            accTyps.AccountType = genAcc.AccountType;
+                            generatedAccountNumber = genAcc.AccountNumber.ToString();
+                            db.AccountTypes.Add(accTyps);
+                        }
                     }
                     db.SaveChanges();
                 }

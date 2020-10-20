@@ -13,9 +13,9 @@
       </mat-select>
     </mat-form-field>
     <!--<mat-form-field class="example-full-width">
-      <mat-label>Currency</mat-label>
-      <input matInput formControlName="mainCurrency">
-  </mat-form-field>-->
+        <mat-label>Currency</mat-label>
+        <input matInput formControlName="mainCurrency">
+    </mat-form-field>-->
 
     <mat-form-field class="example-full-width">
       <mat-label>Account Number</mat-label>
@@ -56,20 +56,12 @@
           <input matInput formControlName="balance" required>
         </mat-form-field>
 
-        <div formArrayName="moreTypeForms">
-          <div class="moreForms"
-               *ngFor="
-        let team of form.get('moreTypeForms').controls;
-        let iTyp = index"
-               [formGroupName]="iTyp">
-            <mat-form-field>
-              <mat-label>Account Type</mat-label>
-              <mat-select formControlName="accountTypes" multiple required>
-                <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
+        <mat-form-field>
+          <mat-label>Account Type</mat-label>
+          <mat-select formControlName="accountTypes" multiple required>
+            <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
 
 
@@ -81,8 +73,10 @@
         </button>
         <hr />
       </div>
-      </div>
-    
+    </div>
+
+          
+
   </form>
   <div class="form-group commands">
     <!--<mat-card-actions>

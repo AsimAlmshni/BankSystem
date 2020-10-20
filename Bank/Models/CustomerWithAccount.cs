@@ -11,8 +11,8 @@ namespace Bank.Models
     {
         public Customer customer;
 
-        public Accounts[] accounts;
-        public AccountTypes[] accountTypes;
+        public AccountForm[] accounts;
+        //public AccountTypes[] accountTypes;
 
     }
 }
