@@ -199,10 +199,10 @@ namespace Bank.Models
                                  where cust.MainAccountNumber == customer.customer.MainAccountNumber
                                  select cust.CustomerId;
 
-                var generatedAccountNumber = Bank.Instance.GetGeneratedNumber().ToString();
 
                 foreach (var item in customer.accounts)
                 {
+                    var generatedAccountNumber = Bank.Instance.GetGeneratedNumber().ToString();
                     Accounts tempAaccount = new Accounts();
                     tempAaccount.Balance = item.Balance;
                     tempAaccount.Currency = item.Currency;
@@ -214,6 +214,7 @@ namespace Bank.Models
 
                     var accID = from acc in db.Accounts
                                 where acc.CustomerId == customer.customer.CustomerId
+                                && acc.AccountNumber == generatedAccountNumber
                                 select acc.AccId;
 
                     foreach (var typ in item.accountTypes)
@@ -225,8 +226,8 @@ namespace Bank.Models
                         accTyps.AccountType = genAcc.AccountType;
                         generatedAccountNumber = genAcc.AccountNumber.ToString();
                         db.AccountTypes.Add(accTyps);
+                        db.SaveChanges();
                     }
-                    db.SaveChanges();
                 }
 
 
