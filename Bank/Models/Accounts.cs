@@ -17,6 +17,7 @@ namespace Bank.Models
         public int CustomerId { get; set; }
         public double Balance { get; set; }
 
+
         public virtual Customer Customer { get; set; }
         public virtual ICollection<AccountActionHistory> AccountActionHistory { get; set; }
         public virtual ICollection<AccountTypes> AccountTypes { get; set; }

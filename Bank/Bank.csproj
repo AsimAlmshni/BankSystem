@@ -57,6 +57,16 @@
     <Folder Include="ClientApp\src\app\enumerator\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="BankAccountFactory\BankAccountFactory.cs" />
+    <None Include="BankAccountFactory\CheckingAccount.cs" />
+    <None Include="BankAccountFactory\CheckingAccountFactory.cs" />
+    <None Include="BankAccountFactory\DepositeAccount.cs" />
+    <None Include="BankAccountFactory\DepositeAccountFactory.cs" />
+    <None Include="DB\BankContext.cs" />
+    <None Include="DB\BankDataAccessLayer.cs" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

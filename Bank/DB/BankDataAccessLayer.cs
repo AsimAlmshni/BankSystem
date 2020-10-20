@@ -199,27 +199,34 @@ namespace Bank.Models
                                  where cust.MainAccountNumber == customer.customer.MainAccountNumber
                                  select cust.CustomerId;
 
-                customer.accounts.CustomerId = customerID.FirstOrDefault();
-                db.Accounts.Add(customer.accounts);
-                db.SaveChanges();
-
-                var accID = from acc in db.Accounts
-                            where acc.CustomerId == customer.customer.CustomerId
-                            select acc.AccId;
-
-
-                foreach (var item in customer.accountTypes)
+                var generatedAccountNumber = Bank.Instance.GetGeneratedNumber().ToString();
+                foreach (var item in customer.accounts)
                 {
+                    item.CustomerId = customerID.FirstOrDefault();
+                    item.AccountNumber = generatedAccountNumber;
+                    db.Accounts.Add(item);
+                    db.SaveChanges();
 
-                    AccountTypes accTyps = new AccountTypes();
-                    var v1 = accID.FirstOrDefault();
-                    accTyps.AccIdtyp = v1;
-                    accTyps.AccountType = Bank.CreateAccount(item).AccountType;
-                    db.AccountTypes.Add(accTyps);
+                    var accID = from acc in db.Accounts
+                                where acc.CustomerId == customer.customer.CustomerId
+                                select acc.AccId;
+
+                    foreach (var itemType in customer.accountTypes)
+                    {
+                        AccountTypes accTyps = new AccountTypes();
+                        var v1 = accID.FirstOrDefault();
+                        accTyps.AccIdtyp = v1;
+                        var genAcc = Bank.CreateAccount(itemType.ToString());
+                        accTyps.AccountType = genAcc.AccountType;
+                        generatedAccountNumber = genAcc.AccountNumber.ToString();
+                        db.AccountTypes.Add(accTyps);
+                    }
+                    db.SaveChanges();
                 }
 
 
-                db.SaveChanges();
+
+
                 return 1;
             }
             catch

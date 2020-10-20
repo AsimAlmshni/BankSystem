@@ -36,7 +36,7 @@ export class CreateEditCustomerComponent implements OnInit {
       //subAccountNumber: "",
       currency: "",
       balance: "",
-      accountType: ""
+      accountTpe: ""
     });
   }
 
@@ -89,17 +89,15 @@ export class CreateEditCustomerComponent implements OnInit {
     debugger
     const tempCustomerWithAccounts: CustomerWithAccounts = new CustomerWithAccounts();
 
-    tempCustomerWithAccounts.accounts = new Account();
     tempCustomerWithAccounts.customer = new CustomerModel();
     tempCustomerWithAccounts.customer.CustomerName = this.form.get('name').value;
     tempCustomerWithAccounts.customer.MainCurrency = this.form.get('mainCurrency').value;
     tempCustomerWithAccounts.customer.MainAccountNumber = this.form.get('MainAccountNumber').value;
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
-    debugger
-    var arrayControl = this.form.value;
+    var x = this.form.get('moreForms').value;
 
-    console.log(arrayControl);
+    console.log(tempCustomerWithAccounts);
     //tempCustomerWithAccounts.accounts.AccountNumber = this.form.get('subAccountNumber').value;
     //tempCustomerWithAccounts.accounts.Balance = this.form.get('balance').value;
     //tempCustomerWithAccounts.accounts.Currency = this.form.get('currency').value;
@@ -113,5 +111,6 @@ export class CreateEditCustomerComponent implements OnInit {
     //  debugger;
     //});
     debugger
+
   }
 }
