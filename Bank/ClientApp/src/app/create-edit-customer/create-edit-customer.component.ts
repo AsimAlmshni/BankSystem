@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CustomerService } from '../core/services/customer.service';
 import { CustomerModel } from '../models/customer.model';
@@ -15,7 +15,7 @@ import { AccountType } from '../models/account-type.model';
   templateUrl: './create-edit-customer.component.html',
   styleUrls: ['./create-edit-customer.component.css']
 })
-export class CreateEditCustomerComponent implements OnInit {
+export class CreateEditCustomerComponent implements OnInit, OnDestroy {
   form: FormGroup;
   currencyDataSource: CurrencyModel[];
   accountTypesDS: AccountTypesDS[];
@@ -50,6 +50,10 @@ export class CreateEditCustomerComponent implements OnInit {
 
   deleteForm(index) {
     (this.form.get("moreForms") as FormArray).removeAt(index);
+  }
+
+  ngOnDestroy() {
+    this.onSubmit();
   }
 
   ngOnInit() {
