@@ -37,5 +37,10 @@ export class AccountTransactionHistoryComponent implements OnInit {
     });
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.CustomerTransactionsHistoryDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 
 }
