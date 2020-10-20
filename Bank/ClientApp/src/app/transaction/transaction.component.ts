@@ -103,6 +103,7 @@ export class TransactionComponent implements OnInit {
           this.transactionService.doTransfer(tempTransfer).subscribe((data) => {
             this.router.navigate(['/']);
           });
+        else
         alert("the transaction couldnot be done trans amount > balance");
 
       }
@@ -129,7 +130,7 @@ export class TransactionComponent implements OnInit {
         this.transactionService.doWithdraw(tempWithdraw).subscribe((data) => {
           this.router.navigate(['/']);
         });
-
+      else
       alert("the transaction couldnot be done trans amount > balance");
     }
 
