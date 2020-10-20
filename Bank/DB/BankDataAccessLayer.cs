@@ -229,10 +229,6 @@ namespace Bank.Models
                         db.SaveChanges();
                     }
                 }
-
-
-
-
                 return 1;
             }
             catch
