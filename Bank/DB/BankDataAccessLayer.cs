@@ -110,6 +110,7 @@ namespace Bank.Models
 
         public void DoTransfer(AccountActionHistory accountTransfer) 
         {
+            double amountEx = 0;
             try
             {
               var tempAccFrom = (from account in db.Accounts
@@ -129,28 +130,45 @@ namespace Bank.Models
                         select ex.ExchangeRate;
               var tempEx = exChane.FirstOrDefault() / exCh.FirstOrDefault();
 
-              accountTransfer.Amount = accountTransfer.Amount * tempEx;
-            }
-        if (accountTransfer.Amount < tempAccFrom.Balance) {
+              amountEx = accountTransfer.Amount * tempEx;
+            if (amountEx < tempAccFrom.Balance) {
 
-                tempAccFrom.Balance -= accountTransfer.Amount;
+                    tempAccFrom.Balance -= accountTransfer.Amount;
 
-                tempAccTo.Balance += accountTransfer.Amount;
+                    tempAccTo.Balance += amountEx;
 
-                accountTransfer.Date = now;
-                accountTransfer.AccountsAccId = tempAccFrom.AccId;
-                accountTransfer.ActionType = "transfer";
-                accountTransfer.Currency = tempAccFrom.Currency;
+                    accountTransfer.Date = now;
+                    accountTransfer.AccountsAccId = tempAccFrom.AccId;
+                    accountTransfer.ActionType = "transfer";
+                    accountTransfer.Currency = tempAccFrom.Currency;
 
-                db.AccountActionHistory.Add(accountTransfer);
-                // Aduit records 
+                    db.AccountActionHistory.Add(accountTransfer);
+                    // Aduit records 
                 
-                db.SaveChanges();
-              }
+                    db.SaveChanges();
+                  }
+                }
+                else if (accountTransfer.Amount < tempAccFrom.Balance)
+                {
+
+                    tempAccFrom.Balance -= accountTransfer.Amount;
+
+                    tempAccTo.Balance += accountTransfer.Amount;
+
+                    accountTransfer.Date = now;
+                    accountTransfer.AccountsAccId = tempAccFrom.AccId;
+                    accountTransfer.ActionType = "transfer";
+                    accountTransfer.Currency = tempAccFrom.Currency;
+
+                    db.AccountActionHistory.Add(accountTransfer);
+                    // Aduit records 
+
+                    db.SaveChanges();
+                }
             }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
+                catch (Exception e) {
+                    Console.WriteLine(e.Message);
+                }
         }
         public IEnumerable<Customer> GetAllCustomers()
         {
