@@ -46,6 +46,7 @@ namespace Bank.Models
                             on account.AccId equals accAH.AccountsAccId
                             where cust.CustomerId == id
                             select accAH;
+
             return accActHis.ToList();
 
         }

@@ -63,6 +63,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   getCustomerTransHistory(id: number) {
+    debugger
     location.href = "/transHistory/view/" + id;
   }
 
