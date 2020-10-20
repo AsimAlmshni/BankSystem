@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
@@ -64,6 +65,30 @@ namespace Bank.Models
                              where (acc.AccountNumber == account.FromAccount.ToString())
                              select acc).FirstOrDefault();
 
+
+                var cust = (from cus in db.Customer
+                            join acc in db.Accounts
+                            on cus.CustomerId equals acc.CustomerId
+                            select cus).FirstOrDefault();
+
+
+                var xeCh = from cur in db.Currencies
+                           where cur.Currency == result.Currency
+                           select cur.ExchangeRate;
+
+                var mainCurrencyExchange = from cur in db.Currencies
+                                           where cur.Currency == cust.MainCurrency
+                                           select cur.ExchangeRate;
+
+                var xe = xeCh.FirstOrDefault() / mainCurrencyExchange.FirstOrDefault();
+                cust.TotalBalance += xe * account.Amount;
+
+                var result2 = db.Customer.SingleOrDefault(b => b.MainAccountNumber == cust.MainAccountNumber);
+                if (result2 != null)
+                {
+                    result2.TotalBalance = cust.TotalBalance;
+                }
+
                 result.Balance += account.Amount;
 
                 account.ToAccount = account.FromAccount;
@@ -89,6 +114,30 @@ namespace Bank.Models
                 var result = (from acc in db.Accounts
                               where (acc.AccountNumber == account.FromAccount.ToString())
                               select acc).FirstOrDefault();
+
+
+                var cust = (from cus in db.Customer
+                            join acc in db.Accounts
+                            on cus.CustomerId equals acc.CustomerId
+                              select cus).FirstOrDefault();
+
+
+                var xeCh = from cur in db.Currencies
+                           where cur.Currency == result.Currency
+                           select cur.ExchangeRate;
+
+                var mainCurrencyExchange = from cur in db.Currencies
+                           where cur.Currency == cust.MainCurrency
+                           select cur.ExchangeRate;
+
+                var xe = xeCh.FirstOrDefault() / mainCurrencyExchange.FirstOrDefault();
+                cust.TotalBalance -= xe * account.Amount;
+
+                var result2 = db.Customer.SingleOrDefault(b => b.MainAccountNumber == cust.MainAccountNumber);
+                if (result2 != null)
+                {
+                    result2.TotalBalance = cust.TotalBalance;
+                }
 
                 result.Balance -= account.Amount;
 
