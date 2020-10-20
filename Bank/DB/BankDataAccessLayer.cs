@@ -216,18 +216,15 @@ namespace Bank.Models
                                 where acc.CustomerId == customer.customer.CustomerId
                                 select acc.AccId;
 
-                    foreach (var itemType in customer.accounts)
+                    foreach (var typ in item.accountTypes)
                     {
-                        foreach (var typ in itemType.accountTypes)
-                        {
-                            AccountTypes accTyps = new AccountTypes();
-                            var v1 = accID.FirstOrDefault();
-                            accTyps.AccIdtyp = v1;
-                            var genAcc = Bank.CreateAccount(typ.ToString());
-                            accTyps.AccountType = genAcc.AccountType;
-                            generatedAccountNumber = genAcc.AccountNumber.ToString();
-                            db.AccountTypes.Add(accTyps);
-                        }
+                        AccountTypes accTyps = new AccountTypes();
+                        var v1 = accID.FirstOrDefault();
+                        accTyps.AccIdtyp = v1;
+                        var genAcc = Bank.CreateAccount(typ.ToString());
+                        accTyps.AccountType = genAcc.AccountType;
+                        generatedAccountNumber = genAcc.AccountNumber.ToString();
+                        db.AccountTypes.Add(accTyps);
                     }
                     db.SaveChanges();
                 }
