@@ -39,17 +39,25 @@ export class CreateEditCustomerComponent implements OnInit {
     return this.formBuilder.group({
       //subAccountNumber: "",
       currency: "",
-      balance: "",
+      balance: ""
+    });
+  }
+
+  get moreTypeForms() {
+    return this.formBuilder.group({
       accountTypes: ""
     });
   }
 
   addMoreForms() {
     (this.form.get("moreForms") as FormArray).push(this.moreForms);
+    (this.form.get("moreTypeForms") as FormArray).push(this.moreTypeForms);
   }
 
   deleteForm(index) {
     (this.form.get("moreForms") as FormArray).removeAt(index);
+    (this.form.get("moreTypeForms") as FormArray).removeAt(index);
+
   }
 
   ngOnInit() {
@@ -77,13 +85,15 @@ export class CreateEditCustomerComponent implements OnInit {
       mainCurrency: ['', Validators.compose([Validators.required])],
       MainAccountNumber: ['', Validators.compose([Validators.required])],
       totalBalance: ['', Validators.compose([Validators.required])],
+      moreForms: this.formBuilder.array([this.moreForms]),
+      moreTypeForms: this.formBuilder.array([this.moreTypeForms])
+
 
       //subAccountNumber: ['', Validators.compose([Validators.required])],
       //balance: ['', Validators.compose([Validators.required])],
       //currency: ['', Validators.compose([Validators.required])],
 
       //accountType: ['', Validators.compose([Validators.required])]
-      moreForms: this.formBuilder.array([this.moreForms])
     })
   }
   
@@ -99,23 +109,23 @@ export class CreateEditCustomerComponent implements OnInit {
     tempCustomerWithAccounts.customer.MainAccountNumber = this.form.get('MainAccountNumber').value;
     tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
 
-    var addAccountFormData = this.form.get('moreForms').value;
+    tempCustomerWithAccounts.accounts = this.form.get('moreForms').value;
+    tempCustomerWithAccounts.accountTypes = this.form.get('moreTypeForms').value;
+
 
     debugger 
 
+    //for (let i = 0; i < addAccountFormData.length; i++) {
+    //  var accountDataForm = new Account();
+    //  var accountTypesDataForm = new AccountType();
 
-    for (let i = 0; i < addAccountFormData.length; i++) {
-      var accountDataForm = new Account();
-      var accountTypesDataForm = new AccountType();
+    //  accountDataForm.Balance = addAccountFormData[i].balance;
+    //  accountDataForm.Currency = addAccountFormData[i].currency;
 
-      accountDataForm.Balance = addAccountFormData[i].balance;
-      accountDataForm.Currency = addAccountFormData[i].currency;
-
-      accountTypesDataForm = addAccountFormData[i].accountTypes;
-
-      tempCustomerWithAccounts.accounts.push(accountDataForm);
-      tempCustomerWithAccounts.accountTypes.push(accountTypesDataForm);
-    }
+    //  accountTypesDataForm = addAccountFormData[i].accountTypes;
+    //  tempCustomerWithAccounts.accounts.push(accountDataForm);
+    //  tempCustomerWithAccounts.accountTypes.push(accountTypesDataForm);
+    //}
 
     console.log(tempCustomerWithAccounts);
     //tempCustomerWithAccounts.accounts.AccountNumber = this.form.get('subAccountNumber').value;

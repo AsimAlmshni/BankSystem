@@ -38,11 +38,10 @@
         let i = index"
            [formGroupName]="i">
 
-
         <!--<mat-form-field class="example-full-width">
-          <mat-label>Account Number</mat-label>
-          <input matInput formControlName="subAccountNumber" [value]="autoGenSubNumber" readonly>
-        </mat-form-field>-->
+    <mat-label>Account Number</mat-label>
+    <input matInput formControlName="subAccountNumber" [value]="autoGenSubNumber" readonly>
+  </mat-form-field>-->
 
         <mat-form-field>
           <mat-label>Currency</mat-label>
@@ -54,19 +53,27 @@
 
         <mat-form-field class="example-full-width">
           <mat-label>Balance</mat-label>
-          <input matInput formControlName="balance">
+          <input matInput formControlName="balance" required>
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Account Type</mat-label>
-          <mat-select formControlName="accountTypes" multiple>
-            <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div formArrayName="moreTypeForms">
+          <div class="moreForms"
+               *ngFor="
+        let team of form.get('moreTypeForms').controls;
+        let iTyp = index"
+               [formGroupName]="iTyp">
+            <mat-form-field>
+              <mat-label>Account Type</mat-label>
+              <mat-select formControlName="accountTypes" multiple required>
+                <mat-option *ngFor="let accTypDS of accountTypesDS" [value]="accTypDS.accountType">{{accTypDS.accountType}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
 
 
 
-        <button  id="btnAddAcc" (click)="addMoreForms()" class="pad" mat-icon-button aria-label="addaccountForm">
+        <button id="btnAddAcc" (click)="addMoreForms()" class="pad" mat-icon-button aria-label="addaccountForm">
           <mat-icon>add_circle_outline</mat-icon>
         </button>
         <button *ngIf="i != 0" id="btnDelAcc" (click)="deleteForm(teamIndex)" class="pad" mat-icon-button aria-label="addaccountForm">
