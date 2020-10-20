@@ -214,6 +214,10 @@ namespace Bank.Models
                 db.Customer.Add(customer.customer);
                 db.SaveChanges();
 
+                var mainCurrencyExchange = from curr in db.Currencies
+                                   where curr.Currency == customer.customer.MainCurrency
+                                   select curr.ExchangeRate;
+
                 var customerID = from cust in db.Customer
                                  where cust.MainAccountNumber == customer.customer.MainAccountNumber
                                  select cust.CustomerId;
@@ -227,6 +231,33 @@ namespace Bank.Models
                     tempAaccount.Currency = item.Currency;
                     tempAaccount.CustomerId = customerID.FirstOrDefault();
                     tempAaccount.AccountNumber = generatedAccountNumber;
+
+                    if (item.Currency == customer.customer.MainCurrency)
+                    {
+                        customer.customer.TotalBalance += item.Balance;
+
+                        var result = db.Customer.SingleOrDefault(b => b.MainAccountNumber == customer.customer.MainAccountNumber);
+                        if (result != null)
+                        {
+                            result.TotalBalance = customer.customer.TotalBalance ;
+                        }
+
+                    }
+                    else 
+                    {
+                        var xeCh = from cur in db.Currencies
+                                   where cur.Currency == item.Currency
+                                   select cur.ExchangeRate;
+
+                        var xe = xeCh.FirstOrDefault() / mainCurrencyExchange.FirstOrDefault() ;
+                        customer.customer.TotalBalance += xe * item.Balance;
+
+                        var result = db.Customer.SingleOrDefault(b => b.MainAccountNumber == customer.customer.MainAccountNumber);
+                        if (result != null)
+                        {
+                            result.TotalBalance = customer.customer.TotalBalance;
+                        }
+                    }
 
                     db.Accounts.Add(tempAaccount);
                     db.SaveChanges();

@@ -28,7 +28,6 @@ export class CreateEditCustomerComponent implements OnInit, OnDestroy {
   autoGenSubNumber: string;
   selectedCurrency: string;
 
-
   constructor(private formBuilder: FormBuilder,
     private customerService: CustomerService,
     private router: Router,) {
@@ -81,8 +80,8 @@ export class CreateEditCustomerComponent implements OnInit, OnDestroy {
       name: ['', Validators.compose([Validators.required])],
       mainCurrency: ['', Validators.compose([Validators.required])],
       MainAccountNumber: ['', Validators.compose([Validators.required])],
-      totalBalance: ['', Validators.compose([Validators.required])],
       moreForms: this.formBuilder.array([this.moreForms]),
+      //totalBalance: ['', Validators.compose([Validators.required])],
 
 
       //subAccountNumber: ['', Validators.compose([Validators.required])],
@@ -103,7 +102,7 @@ export class CreateEditCustomerComponent implements OnInit, OnDestroy {
     tempCustomerWithAccounts.customer.CustomerName = this.form.get('name').value;
     tempCustomerWithAccounts.customer.MainCurrency = this.form.get('mainCurrency').value;
     tempCustomerWithAccounts.customer.MainAccountNumber = this.form.get('MainAccountNumber').value;
-    tempCustomerWithAccounts.customer.TotalBalance = this.form.get('totalBalance').value;
+    tempCustomerWithAccounts.customer.TotalBalance = 0;
 
     tempCustomerWithAccounts.accounts = this.form.get('moreForms').value;
 
