@@ -232,31 +232,17 @@ namespace Bank.Models
                     tempAaccount.CustomerId = customerID.FirstOrDefault();
                     tempAaccount.AccountNumber = generatedAccountNumber;
 
-                    if (item.Currency == customer.customer.MainCurrency)
+                    var xeCh = from cur in db.Currencies
+                                where cur.Currency == item.Currency
+                                select cur.ExchangeRate;
+
+                    var xe = xeCh.FirstOrDefault() / mainCurrencyExchange.FirstOrDefault() ;
+                    customer.customer.TotalBalance += xe * item.Balance;
+
+                    var result = db.Customer.SingleOrDefault(b => b.MainAccountNumber == customer.customer.MainAccountNumber);
+                    if (result != null)
                     {
-                        customer.customer.TotalBalance += item.Balance;
-
-                        var result = db.Customer.SingleOrDefault(b => b.MainAccountNumber == customer.customer.MainAccountNumber);
-                        if (result != null)
-                        {
-                            result.TotalBalance = customer.customer.TotalBalance ;
-                        }
-
-                    }
-                    else 
-                    {
-                        var xeCh = from cur in db.Currencies
-                                   where cur.Currency == item.Currency
-                                   select cur.ExchangeRate;
-
-                        var xe = xeCh.FirstOrDefault() / mainCurrencyExchange.FirstOrDefault() ;
-                        customer.customer.TotalBalance += xe * item.Balance;
-
-                        var result = db.Customer.SingleOrDefault(b => b.MainAccountNumber == customer.customer.MainAccountNumber);
-                        if (result != null)
-                        {
-                            result.TotalBalance = customer.customer.TotalBalance;
-                        }
+                        result.TotalBalance = customer.customer.TotalBalance;
                     }
 
                     db.Accounts.Add(tempAaccount);
