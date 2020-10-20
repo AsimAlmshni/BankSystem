@@ -53,7 +53,8 @@ export class CreateEditCustomerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.onSubmit();
+    debugger
+    document.getElementById("myCheckngDestroy").click();
   }
 
   ngOnInit() {

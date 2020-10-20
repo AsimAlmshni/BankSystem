@@ -83,6 +83,7 @@
       <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
     </mat-card-actions>-->
     <button *ngIf="!id" type="submit"
+            id="ngDestroy"
             (click)="onSubmit()"
             [disabled]="form.invalid"
             class="btn btn-success">
