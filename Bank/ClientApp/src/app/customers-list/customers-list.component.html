@@ -35,14 +35,14 @@
       <th mat-header-cell *matHeaderCellDef> Total Balance </th>
       <td mat-cell *matCellDef="let element">
         {{element.totalBalance | currency : element.mainCurrency}}
-        <button id="btnAccEq" (click)="variable.a = false;getCustomerEquality(element.mainAccountNumber)" class="pad" mat-icon-button aria-label="Go to Customer Compare">
-          <mat-icon>done_all</mat-icon>
-        </button>
         <button id="btnAccHis" (click)="variable.a = false;getCustomerTransHistory(element.customerId)" class="pad" mat-icon-button aria-label="Go to Customer History">
           <mat-icon>open_in_new</mat-icon>
         </button>
         <button id="btnAccTrans" (click)="variable.a = false;doTransaction(element.customerId)" class="pad" mat-icon-button aria-label="doTransaction">
           <mat-icon>import_export</mat-icon>
+        </button>
+        <button id="btnAccEq" (click)="variable.a = false;getCustomerEquality(element.mainAccountNumber)" class="pad" mat-icon-button aria-label="Go to Customer Compare">
+          <mat-icon>done_all</mat-icon>
         </button>
       </td>
     </ng-container>
