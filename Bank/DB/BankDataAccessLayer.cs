@@ -316,7 +316,7 @@ namespace Bank.Models
                                 where acc.CustomerId == customer.customer.CustomerId
                                 && acc.AccountNumber == generatedAccountNumber
                                 select acc.AccId;
-
+                    var flag = 1;
                     foreach (var typ in item.accountTypes)
                     {
                         AccountTypes accTyps = new AccountTypes();
@@ -324,10 +324,15 @@ namespace Bank.Models
                         accTyps.AccIdtyp = v1;
                         var genAcc = Bank.CreateAccount(typ.ToString());
                         accTyps.AccountType = genAcc.AccountType;
-                        generatedAccountNumber = genAcc.AccountNumber.ToString();
+                        if(flag == 1)
+                        {
+                            generatedAccountNumber = genAcc.AccountNumber.ToString();
+                            flag = 0;
+                        }
                         db.AccountTypes.Add(accTyps);
                         db.SaveChanges();
                     }
+
                 }
                 return 1;
             }
