@@ -317,10 +317,11 @@ namespace Bank.Models
                                 && acc.AccountNumber == generatedAccountNumber
                                 select acc.AccId;
                     var flag = 1;
+                    var v1 = accID.FirstOrDefault();
+                    
                     foreach (var typ in item.accountTypes)
                     {
                         AccountTypes accTyps = new AccountTypes();
-                        var v1 = accID.FirstOrDefault();
                         accTyps.AccIdtyp = v1;
                         var genAcc = Bank.CreateAccount(typ.ToString());
                         accTyps.AccountType = genAcc.AccountType;
