@@ -27,6 +27,10 @@ namespace Bank
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddCors(options =>
+                options.AddDefaultPolicy(builder =>builder.WithOrigins("https://localhost:4200").AllowAnyMethod().AllowAnyHeader())
+                );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +55,9 @@ namespace Bank
             }
 
             app.UseRouting();
+            app.UseCors();
+            app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
