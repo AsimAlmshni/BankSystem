@@ -60,7 +60,7 @@ namespace Bank.Models
                             on cust.CustomerId equals account.CustomerId
                             join accAH in db.AccountActionHistory
                             on account.AccId equals accAH.AccountsAccId
-                            where cust.CustomerId == id
+                            where cust.CustomerId == id && account.AccId == accAH.AccountsAccId
                             select accAH;
 
             return accActHis.ToList();
