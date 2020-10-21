@@ -1,0 +1,20 @@
+<h3>get Equaled Accounts</h3>
+<hr >
+<table class="table">
+  <tr>
+    <th scope="col">CustomerID</th>
+    <th scope="col">Customer name</th>
+    <th scope="col">Main Account Number</th>
+    <th scope="col">Main currency</th>
+    <th scope="col">Total Balance</th>
+  </tr>
+  <tr *ngFor="let item of dataSource">
+    <td scope="row"> {{ item.customerID }} </td>
+    <td scope="row"> {{ item.customerName }} </td>
+    <td scope="row"> {{ item.mainAccountNumber}} </td>
+    <td scope="row"> {{ item.mainCurrency}} </td>
+    <td scope="row"> {{ item.totalBalance }} </td>
+  </tr>
+</table>
+
+<hr >

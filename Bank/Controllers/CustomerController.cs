@@ -13,6 +13,13 @@ namespace Bank.Controllers
     {
         private BankDataAccessLayer obj = new BankDataAccessLayer();
 
+        [HttpGet("{number}")]
+        public IEnumerable<Customer> getEqualsAccounts(string number) 
+        {
+            return obj.GetEqualsCustomersAccount(number);
+        }
+
+
         [HttpGet]
         public IEnumerable<Customer> GetCustomer()
         {

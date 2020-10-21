@@ -45,4 +45,8 @@ export class CustomerService {
   getAccountTypsFromDataSet(): Observable<AccountTypesDS[]> {
     return this.http.get<AccountTypesDS[]>('api/AccountTypes/getAccountsTypsDataSet');
   }
+
+  getEqualsAccount(number): Observable<CustomerModel[]> {
+    return this.http.get<CustomerModel[]>('api/customer/getEqualsAccounts/' + number);
+  }
 }

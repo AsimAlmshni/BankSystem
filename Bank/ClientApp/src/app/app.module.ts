@@ -11,6 +11,7 @@ import { MaterialModule } from './material-module/material.module';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AccountTransactionHistoryComponent } from './account-transaction-history/account-transaction-history.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { CompareComponent } from './compare/compare.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TransactionComponent } from './transaction/transaction.component';
     CreateEditCustomerComponent,
     AccountTransactionHistoryComponent,
     TransactionComponent,
+    CompareComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,6 +52,9 @@ import { TransactionComponent } from './transaction/transaction.component';
       }, {
         path: 'transaction/:id',
         component: TransactionComponent
+      }, {
+        path: 'compare/:number',
+        component: CompareComponent
       }
     ]),
     BrowserAnimationsModule

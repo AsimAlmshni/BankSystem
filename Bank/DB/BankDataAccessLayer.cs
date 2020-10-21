@@ -17,6 +17,21 @@ namespace Bank.Models
         BankContext db = new BankContext();
         DateTime now = DateTime.Now;
 
+
+        public IEnumerable<Customer> GetEqualsCustomersAccount(string accountnumber) 
+        {
+            var allCustomers = from customer in db.Customer
+                               where customer.MainAccountNumber == accountnumber
+                               select customer;
+              
+
+            if (allCustomers.Count() >= 2)
+            {
+                return allCustomers.ToList();
+            }
+            return null;
+        }
+
         public dynamic GetAccountsBalance(int id ) {
 
             var tbl = from cust in db.Customer

@@ -72,6 +72,9 @@ export class CustomersListComponent implements OnInit {
     location.href = "/transaction/" + id;
   }
 
+  getCustomerEquality(accNumber: number) {
+    location.href = "/compare/" + accNumber;
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
