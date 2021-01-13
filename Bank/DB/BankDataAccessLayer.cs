@@ -236,14 +236,7 @@ namespace Bank.Models
         }
         public IEnumerable<Customer> GetAllCustomers()
         {
-            try
-            {
                 return db.Customer.ToList();
-            }
-            catch
-            {
-                throw;
-            }
         }
 
         public IEnumerable<Accounts> GetCustomerAccounts(int CustomerID) 
@@ -362,15 +355,8 @@ namespace Bank.Models
         //Get the details of a particular Customer  
         public Customer GetCustomerData(int id)
         {
-            try
-            {
                 Customer customer = db.Customer.Find(id);
                 return customer;
-            }
-            catch
-            {
-                throw;
-            }
         }
 
         public IEnumerable<AccountTypesDataSet> GetAccountTypesDS() {
@@ -385,14 +371,7 @@ namespace Bank.Models
         //To Get the list of AccountsActions  
         public List<AccountActionHistory> GetHistory()
         {
-            try
-            {
                 return db.AccountActionHistory.ToList();
-            }
-            catch
-            {
-                throw;
-            }
         }
     }
 }
